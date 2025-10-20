@@ -1,8 +1,10 @@
 package com.example.fantastika.SideBar.DropZone
 
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.MarqueeAnimationMode
+import androidx.compose.foundation.MarqueeSpacing
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -18,7 +20,6 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
 import com.example.fantastika.R
@@ -29,74 +30,49 @@ fun PlayerCard(
     price: Int,
     rating: Int = 2
 ) {
-    val viewportWidth = 40.dp
-    val contentHeight = 120.dp
-    val targetOffsetY = -80f
-
-    // Animate player name from bottom to top
-    val infiniteTransition = rememberInfiniteTransition(label = "nameAnimation")
-    val offsetY by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = targetOffsetY,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 4000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "offsetY"
-    )
-
     Card(
-        modifier = Modifier.size(200.dp),
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Black)
     ) {
         Box(Modifier.fillMaxSize()) {
-            // Background image
             Image(
                 painter = painterResource(id = R.drawable.imagelogo),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 30.dp, top = 4.dp, end = 8.dp, bottom = 30.dp)
+                    .padding(start = 30.dp, top = 10.dp, end = 8.dp, bottom = 30.dp)
                     .align(Alignment.TopCenter)
             )
-
-            // Vertical red bar with animated name
             Box(
                 modifier = Modifier
-                    .width(viewportWidth)
-                    .fillMaxHeight()
-                    .background(Color.Black)
                     .align(Alignment.CenterStart)
-                    .clip(RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)),
+                    .offset(x = (-32).dp, y = (-14).dp)
+                    .rotate(-360f)
+                    .width(150.dp)
+                    .height(30.dp),
                 contentAlignment = Alignment.Center
             ) {
-                // Give enough horizontal room after rotation
-                Box(
-                    modifier = Modifier
-                        .background(Color.Red)
-                        .width(200.dp) // 👈 widen enough for long names
-                        .offset(y = offsetY.dp)
-                        .rotate(90f),
-                    contentAlignment = Alignment.Center
-                ) {
+                Row(modifier = Modifier.padding(5.dp)) {
                     Text(
                         text = playerName,
-                        color = Color.White,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        softWrap = false,          // prevent weird wrapping
-                        maxLines = 1,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier
+                            .padding(horizontal = 2.dp)
+                            .graphicsLayer {
+                                rotationZ = 90f
+                            }
+                            .basicMarquee(
+                                iterations = Int.MAX_VALUE,
+                                animationMode = MarqueeAnimationMode.Immediately,
+                                spacing = MarqueeSpacing.fractionOfContainer(1f / 3f),
+                                initialDelayMillis = 0,
+                                velocity = 50.dp
+                            ),
+                        color = Color.White
                     )
                 }
+            }
 
-    }
-
-
-            // Price label
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
@@ -115,7 +91,6 @@ fun PlayerCard(
                 )
             }
 
-            // Rating box
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
