@@ -14,77 +14,71 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.*
 import com.example.fantastika.R
 
 @Composable
 fun PlayerCard(
     playerName: String,
-    price: Int
+    price: Int,
+    rating: Int = 2
 ) {
-
-    val infiniteTransition = rememberInfiniteTransition()
     val viewportWidth = 40.dp
-    val contentWidth = 200.dp
-    val targetMarqueeOffset = -(contentWidth.value)
+    val contentHeight = 120.dp
+    val targetOffsetY = -80f
 
-    val offsetX by infiniteTransition.animateFloat(
+    // Animate player name from bottom to top
+    val infiniteTransition = rememberInfiniteTransition(label = "nameAnimation")
+    val offsetY by infiniteTransition.animateFloat(
         initialValue = 0f,
-        targetValue = targetMarqueeOffset,
+        targetValue = targetOffsetY,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 6000, easing = LinearEasing),
+            animation = tween(durationMillis = 4000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
-        )
+        ),
+        label = "offsetY"
     )
 
     Card(
+        modifier = Modifier.size(200.dp),
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Black),
+        colors = CardDefaults.cardColors(containerColor = Color.Black)
     ) {
         Box(Modifier.fillMaxSize()) {
+            // Background image
             Image(
                 painter = painterResource(id = R.drawable.imagelogo),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(
-                        start = 40.dp,
-                        top = 4.dp,
-                        end = 8.dp,
-                        bottom = 30.dp
-                    )
+                    .padding(start = 30.dp, top = 4.dp, end = 8.dp, bottom = 30.dp)
                     .align(Alignment.TopCenter)
             )
+
+            // Vertical red bar with animated name
             Box(
                 modifier = Modifier
-                    .width(viewportWidth) // Fixed width of the visible name area
+                    .width(viewportWidth)
                     .fillMaxHeight()
                     .background(Color.Black)
-                    // FIX: Position to the start of the card
                     .align(Alignment.CenterStart)
-                    // Clip the corners and the content
                     .clip(RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)),
                 contentAlignment = Alignment.Center
             ) {
+                // Give enough horizontal room after rotation
                 Box(
                     modifier = Modifier
-                        .width(contentWidth)
-                        .rotate(90f)
-                        // FIX: Apply the scrolling offset to the content
-                        .offset(x = offsetX.dp),
+                        .background(Color.Red)
+                        .width(200.dp) // 👈 widen enough for long names
+                        .offset(y = offsetY.dp)
+                        .rotate(90f),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -92,30 +86,23 @@ fun PlayerCard(
                         color = Color.White,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Start,
+                        textAlign = TextAlign.Center,
+                        softWrap = false,          // prevent weird wrapping
                         maxLines = 1,
-                        softWrap = false,
+                        modifier = Modifier.padding(horizontal = 8.dp)
                     )
                 }
-            }
 
-            //.width(maxMarqueeWidth)
-            //                    .fillMaxHeight()
-            //                    .background(Color.Black)
-            //
-            //                    .rotate(90f) // Apply rotation here
-            //                    .offset(x = offsetX.dp)
-            //                    //.align(Alignment.CenterStart),
-            //                    .clip(RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)),
-            //                contentAlignment = Alignment.Center
+    }
 
 
+            // Price label
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(bottom = 10.dp)
                     .height(28.dp)
-                    .clip((TrapeziumShape(cutAmount = 40f)))
+                    .clip(TrapeziumShape(cutAmount = 40f))
                     .background(Color.White)
                     .padding(horizontal = 10.dp),
                 contentAlignment = Alignment.Center
@@ -124,11 +111,11 @@ fun PlayerCard(
                     text = "$$price",
                     color = Color.Black,
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1,
+                    fontWeight = FontWeight.Bold
                 )
             }
 
+            // Rating box
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
@@ -138,11 +125,10 @@ fun PlayerCard(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "2",
+                    text = rating.toString(),
                     color = Color.White,
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1,
+                    fontWeight = FontWeight.Bold
                 )
             }
         }
@@ -171,6 +157,7 @@ class TrapeziumShape(private val cutAmount: Float) : Shape {
 private fun PlayerCardPreview() {
     PlayerCard(
         playerName = "Player Name",
-        price = 1150
+        price = 1150,
+        rating = 2
     )
 }
