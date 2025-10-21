@@ -38,7 +38,8 @@ fun DropZone(
     droppedItem: String?,
     onItemDropped: (String) -> Unit,
     onItemRemoved: (String) -> Unit,
-    usedItems: List<String>
+    usedItems: List<String>,
+    //modifier: Modifier
 ) {
 
     var showDialog by remember { mutableStateOf(false) }

@@ -6,15 +6,12 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -24,8 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.fantastika.SideBar.DropZone.DropZone
 import com.example.fantastika.SideBar.SideBarViewModel
-import kotlinx.coroutines.launch
 import com.example.fantastika.SideBar.SidebarContent
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,7 +74,7 @@ fun SideBarDragDrop(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(padding), // <-- Crucial padding application
+                    .padding(padding),
                 contentAlignment = Alignment.TopCenter
             ) {
                 Image(
@@ -96,19 +93,19 @@ fun SideBarDragDrop(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(450.dp)
-                            .padding(horizontal = 16.dp)
-                            .graphicsLayer {
-                                rotationX = rotationAngle
-                                cameraDistance = 8 * density
-                            },
+                            .height(490.dp)
+                            .padding(horizontal = 16.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.court),
                             contentDescription = "DropZone Background",
                             modifier = Modifier
-                                .fillMaxSize(),
+                                .fillMaxSize()
+                                .graphicsLayer {
+                                    rotationX = rotationAngle
+                                    cameraDistance = 8 * density
+                                },
                             contentScale = ContentScale.Crop
                         )
 
@@ -117,7 +114,7 @@ fun SideBarDragDrop(
                             verticalArrangement = Arrangement.spacedBy(64.dp),
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(50.dp)
+                                .padding(top = 100.dp)
                         ) {
                             DropZone(
                                 droppedItem = droppedZones[0],
@@ -145,11 +142,12 @@ fun SideBarDragDrop(
                             }
                         }
                     }
+
                     //Active players
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 20.dp)
+                            .padding(top = 40.dp)
                             .horizontalScroll(rememberScrollState()),
                     ) {
                         Box(
@@ -204,7 +202,6 @@ fun SideBarDragDrop(
                                             onItemRemoved = { viewModel.onItemRemoved(4, it) },
                                             usedItems = usedItems
                                         )
-
                                     }
                                 }
                             }
