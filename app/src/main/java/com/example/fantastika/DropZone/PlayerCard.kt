@@ -1,4 +1,4 @@
-package com.example.fantastika.SideBar.DropZone
+package com.example.fantastika.DropZone
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.MarqueeAnimationMode
@@ -31,7 +31,7 @@ fun PlayerCard(
     rating: Int = 2
 ) {
     Card(
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Black)
     ) {
         Box(Modifier.fillMaxSize()) {

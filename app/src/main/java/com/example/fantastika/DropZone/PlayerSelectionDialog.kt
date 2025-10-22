@@ -1,4 +1,4 @@
-package com.example.fantastika.SideBar.DropZone
+package com.example.fantastika.DropZone
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll

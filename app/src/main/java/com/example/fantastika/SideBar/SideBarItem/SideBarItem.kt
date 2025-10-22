@@ -78,7 +78,6 @@ fun SidebarItem(
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            //SidebarItemLogo(label)
             Image(
                 painter = painterResource(id = R.drawable.imagelogo),
                 contentDescription = "App Background",

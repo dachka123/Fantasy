@@ -19,15 +19,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.fantastika.SideBar.DropZone.DropZone
+import com.example.fantastika.DropZone.DropZone
 import com.example.fantastika.SideBar.SideBarViewModel
 import com.example.fantastika.SideBar.SidebarContent
+import com.example.fantastika.SideBar.ThemeSwitcher
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SideBarDragDrop(
-    viewModel: SideBarViewModel = viewModel()
+    viewModel: SideBarViewModel = viewModel(),
+    darkTheme: Boolean,
+    onThemeUpdated: () -> Unit
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -35,6 +38,7 @@ fun SideBarDragDrop(
     val droppedZones by viewModel.droppedZones.collectAsState()
     val usedItems by viewModel.usedItems.collectAsState()
     var rotationAngle by remember { mutableStateOf(0f) }
+    //var darkTheme by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         androidx.compose.animation.core.animate(
@@ -67,6 +71,14 @@ fun SideBarDragDrop(
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(Icons.Default.Menu, contentDescription = "Menu")
                         }
+                    },
+                    actions = {
+                        ThemeSwitcher(
+                            darkTheme = darkTheme,
+                            size = 30.dp,
+                            onClick = onThemeUpdated
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
                     }
                 )
             }
@@ -158,7 +170,7 @@ fun SideBarDragDrop(
                             Row(
                                 modifier = Modifier
                                     .fillMaxSize(),
-                                horizontalArrangement = Arrangement.spacedBy(5.dp)
+                                horizontalArrangement = Arrangement.spacedBy(15.dp)
                             ) {
                                 DropZone(
                                     droppedItem = droppedZones[0],
@@ -188,7 +200,7 @@ fun SideBarDragDrop(
                                     Row (
                                         modifier = Modifier
                                             .fillMaxSize(),
-                                        horizontalArrangement = Arrangement.spacedBy(5.dp)
+                                        horizontalArrangement = Arrangement.spacedBy(15.dp)
                                     ){
                                         DropZone(
                                             droppedItem = droppedZones[3],
