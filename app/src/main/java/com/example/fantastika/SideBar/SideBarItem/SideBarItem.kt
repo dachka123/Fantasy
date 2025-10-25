@@ -37,6 +37,7 @@ import com.example.fantastika.R
 fun SidebarItem(
     label: String,
     price: Int,
+    team: String,
     onClick: () -> Unit,
     isUsed: Boolean,
     isDraggable: Boolean = true,
@@ -91,6 +92,11 @@ fun SidebarItem(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f)
+            )
+            Text(
+                text = team,
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                modifier = Modifier.padding(end = 5.dp)
             )
             Text(
                 text = "$$price",

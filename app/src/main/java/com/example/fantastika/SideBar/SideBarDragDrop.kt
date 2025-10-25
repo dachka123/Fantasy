@@ -53,7 +53,7 @@ fun SideBarDragDrop(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet(Modifier.width(250.dp)) {
+            ModalDrawerSheet(Modifier.width(350.dp)) {
                 SidebarContent(
                     usedItems = usedItems,
                     onItemDragStart = {

@@ -6,22 +6,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.draganddrop.dragAndDropTarget
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draganddrop.DragAndDropEvent
@@ -35,6 +25,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.fantastika.DropZone.PlayerDetails.PlayerDetailsBottomDialog
+import com.example.fantastika.data.allPlayers
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -46,16 +38,17 @@ fun DropZone(
 ) {
 
     var showDialog by remember { mutableStateOf(false) }
+    var showPlayerDetailsDialog by remember { mutableStateOf(false) }
 
-    val allPlayers = listOf(
-        "LeBronLeBronLeBronLeBron" to 1200,
-        "Curry" to 1150,
-        "Harden" to 900,
-        "Javakhishvili" to 1100,
-        "AD" to 950,
-        "MJ" to 2000,
-        "Koby" to 1800
-    )
+    /*val allPlayers = listOf(
+        Triple("LebronLebronLebronLebronLebronLebron", 1200, "Lakers"),
+        Triple("Curry", 1150, "Warriors"),
+        Triple("Harden", 900, "Nets"),
+        Triple("Javakhishvili", 1100, "Mavericks"),
+        Triple("AD", 950, "Lakers"),
+        Triple("MJ", 2000, "Bulls"),
+        Triple("Koby", 1800, "Lakers")
+    )*/
 
     Box(
         modifier = Modifier
@@ -109,16 +102,21 @@ fun DropZone(
                     }
                 }
             )
-            .clickable(enabled = droppedItem == null) {
-                showDialog = true
+            .clickable {
+                if (droppedItem == null) {
+                    showDialog = true
+                } else {
+                    showPlayerDetailsDialog = true
+                }
             },
         contentAlignment = Alignment.Center
     ) {
         if (droppedItem != null) {
+            val player = allPlayers.firstOrNull { it.name == droppedItem }
             Box(modifier = Modifier.fillMaxSize()) {
                 PlayerCard(
                     playerName = droppedItem,
-                    price = allPlayers.firstOrNull { it.first == droppedItem }?.second ?: 0,
+                    price = player?.price ?: 0
                 )
                 Icon(
                     imageVector = Icons.Filled.Close,
@@ -147,8 +145,22 @@ fun DropZone(
             usedItems = usedItems,
             onDismiss = { showDialog = false },
             onPlayerSelected = { player ->
-                onItemDropped(player)
+                onItemDropped(player.name)
                 showDialog = false
+            }
+        )
+    }
+    if (showPlayerDetailsDialog && droppedItem != null) {
+        val playerData = allPlayers.firstOrNull { it.name == droppedItem }
+
+        PlayerDetailsBottomDialog(
+            playerName = droppedItem,
+            playerPrice = playerData?.price ?: 0,
+            playerTeam = playerData?.team ?: "Free Agent",
+            onDismiss = { showPlayerDetailsDialog = false },
+            onRemove = {
+                onItemRemoved(droppedItem)
+                showPlayerDetailsDialog = false
             }
         )
     }
