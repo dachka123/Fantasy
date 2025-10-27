@@ -2,6 +2,8 @@
 
 package com.example.fantastika
 
+import androidx.compose.animation.core.animate
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
@@ -19,10 +21,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.fantastika.DropZone.DropZone
-import com.example.fantastika.SideBar.SideBarViewModel
-import com.example.fantastika.SideBar.SidebarContent
-import com.example.fantastika.SideBar.ThemeSwitcher
+import com.example.fantastika.PlayerSelection.DropZone.DropZone
+import com.example.fantastika.PlayerSelection.SideBar.SideBarViewModel
+import com.example.fantastika.PlayerSelection.SideBar.SidebarContent
+import com.example.fantastika.PlayerSelection.SideBar.ThemeSwitcher
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,10 +43,10 @@ fun SideBarDragDrop(
     //var darkTheme by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        androidx.compose.animation.core.animate(
+        animate(
             initialValue = 0f,
             targetValue = 35f,
-            animationSpec = androidx.compose.animation.core.tween(1500)
+            animationSpec = tween(1500)
         ) { value, _ ->
             rotationAngle = value
         }

@@ -1,4 +1,4 @@
-package com.example.fantastika.DropZone
+package com.example.fantastika.PlayerSelection.DropZone
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.MarqueeAnimationMode

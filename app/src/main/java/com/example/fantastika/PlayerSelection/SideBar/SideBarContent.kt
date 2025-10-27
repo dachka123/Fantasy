@@ -1,0 +1,79 @@
+package com.example.fantastika.PlayerSelection.SideBar
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.example.fantastika.PlayerSelection.common.FilterContent
+import com.example.fantastika.PlayerSelection.common.FilterMode
+import com.example.fantastika.PlayerSelection.common.FilterSection
+import com.example.fantastika.PlayerSelection.common.SortMode
+import com.example.fantastika.PlayerSelection.common.SortSection
+import com.example.fantastika.PlayerSelection.data.allPlayers
+
+
+@Composable
+fun SidebarContent(
+    usedItems: List<String>,
+    onItemDragStart: () -> Unit
+) {
+    var filterMode by remember { mutableStateOf(FilterMode.PLAYERS) }
+    var selectedTeam by remember { mutableStateOf<String?>(null) }
+    var sortMode by remember { mutableStateOf(SortMode.NAME) }
+
+    // Reset sort to NAME when changing filter modes
+    /*LaunchedEffect(filterMode) {
+        sortMode = SortMode.NAME
+    }*/
+
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxHeight()
+    ) {
+        Text("Fantasy Basketball", style = MaterialTheme.typography.headlineMedium)
+
+        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+        FilterSection(
+            filterMode = filterMode,
+            selectedTeam = selectedTeam,
+            onFilterChange = { filterMode = it },
+            onBackToTeams = {
+                filterMode = FilterMode.TEAMS
+                selectedTeam = null
+            }
+        )
+
+
+        // Sort Buttons (visible only for PLAYERS and TEAM_PLAYERS)
+        SortSection(
+            filterMode = filterMode,
+            sortMode = sortMode,
+            onSortChange = { sortMode = it }
+        )
+        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+
+        // Content based on filter
+        FilterContent(
+            modifier = Modifier.weight(1f),
+            filterMode = filterMode,
+            sortMode = sortMode,
+            allPlayers = allPlayers,
+            usedItems = usedItems,
+            selectedTeam = selectedTeam,
+            onPlayerSelected = {},
+            onTeamSelected = {
+                selectedTeam = it
+                filterMode = FilterMode.TEAM_PLAYERS
+            },
+            isDraggable = true,
+            onDragStart = onItemDragStart
+        )
+
+    }
+}

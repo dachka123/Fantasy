@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalFoundationApi::class)
 
-package com.example.fantastika.SideBar.SideBarItem
+package com.example.fantastika.PlayerSelection.SideBar.SideBarItem
 
 import android.content.ClipData
 import android.content.ClipDescription

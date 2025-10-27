@@ -1,4 +1,4 @@
-package com.example.fantastika.DropZone
+package com.example.fantastika.PlayerSelection.DropZone
 
 import android.content.ClipDescription
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -25,8 +25,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.fantastika.DropZone.PlayerDetails.PlayerDetailsBottomDialog
-import com.example.fantastika.data.allPlayers
+import com.example.fantastika.PlayerSelection.DropZone.PlayerDetails.PlayerDetailsBottomDialog
+import com.example.fantastika.PlayerSelection.data.allPlayers
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -39,16 +39,6 @@ fun DropZone(
 
     var showDialog by remember { mutableStateOf(false) }
     var showPlayerDetailsDialog by remember { mutableStateOf(false) }
-
-    /*val allPlayers = listOf(
-        Triple("LebronLebronLebronLebronLebronLebron", 1200, "Lakers"),
-        Triple("Curry", 1150, "Warriors"),
-        Triple("Harden", 900, "Nets"),
-        Triple("Javakhishvili", 1100, "Mavericks"),
-        Triple("AD", 950, "Lakers"),
-        Triple("MJ", 2000, "Bulls"),
-        Triple("Koby", 1800, "Lakers")
-    )*/
 
     Box(
         modifier = Modifier

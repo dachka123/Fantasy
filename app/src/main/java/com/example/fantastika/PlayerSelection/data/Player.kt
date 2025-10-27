@@ -1,4 +1,4 @@
-package com.example.fantastika.data
+package com.example.fantastika.PlayerSelection.data
 
 data class Player(
     val name: String,

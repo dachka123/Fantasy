@@ -1,4 +1,4 @@
-package com.example.fantastika.DropZone.PlayerDetails
+package com.example.fantastika.PlayerSelection.DropZone.PlayerDetails
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -78,7 +78,6 @@ fun PlayerDetailsBottomDialog(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomCenter
         ) {
-            // Dimmed background
             Box(
                 modifier = Modifier
                     .fillMaxSize()
