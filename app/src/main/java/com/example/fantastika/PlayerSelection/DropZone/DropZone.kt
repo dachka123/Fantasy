@@ -130,7 +130,7 @@ fun DropZone(
         }
     }
     if (showDialog) {
-        PlayerSelectionDialog(
+        PlayerSelectionDrawer(
             allPlayers = allPlayers,
             usedItems = usedItems,
             onDismiss = { showDialog = false },

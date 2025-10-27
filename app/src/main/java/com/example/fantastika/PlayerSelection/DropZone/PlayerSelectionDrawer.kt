@@ -1,26 +1,24 @@
 package com.example.fantastika.PlayerSelection.DropZone
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.PlayerSelection.common.DrawerDragHandle
 import com.example.fantastika.PlayerSelection.common.FilterContent
 import com.example.fantastika.PlayerSelection.common.FilterMode
 import com.example.fantastika.PlayerSelection.common.FilterSection
+import com.example.fantastika.PlayerSelection.common.IphoneDrawer
 import com.example.fantastika.PlayerSelection.common.SortMode
 import com.example.fantastika.PlayerSelection.common.SortSection
 import com.example.fantastika.PlayerSelection.data.Player
 
 
 @Composable
-fun PlayerSelectionDialog(
+fun PlayerSelectionDrawer(
     allPlayers: List<Player>,
     usedItems: List<String>,
     onDismiss: () -> Unit,
@@ -35,49 +33,55 @@ fun PlayerSelectionDialog(
         sortMode = SortMode.NAME
     }*/
 
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        confirmButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel")
-            }
-        },
-        title = {
+    IphoneDrawer(
+        onDismiss = onDismiss,
+        heightFraction = 0.85f,
+        backgroundColor = Color.White
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 16.dp)
+        ) {
+            DrawerDragHandle(
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
             Text(
-                when (filterMode) {
+                text = when (filterMode) {
                     FilterMode.PLAYERS -> "Select Player"
                     FilterMode.TEAMS -> "Select Team"
                     FilterMode.TEAM_PLAYERS -> selectedTeam ?: "Team Players"
                 },
-                style = MaterialTheme.typography.headlineSmall
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier.padding(bottom = 16.dp)
             )
-        },
-        text = {
-            Column(
+
+            FilterSection(
+                filterMode = filterMode,
+                selectedTeam = selectedTeam,
+                onFilterChange = { filterMode = it },
+                onBackToTeams = {
+                    filterMode = FilterMode.TEAMS
+                    selectedTeam = null
+                }
+            )
+
+            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+            SortSection(
+                filterMode = filterMode,
+                sortMode = sortMode,
+                onSortChange = { sortMode = it }
+            )
+
+            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(max = 450.dp)
+                    .weight(1f)
             ) {
-                FilterSection(
-                    filterMode = filterMode,
-                    selectedTeam = selectedTeam,
-                    onFilterChange = { filterMode = it },
-                    onBackToTeams = {
-                        filterMode = FilterMode.TEAMS
-                        selectedTeam = null
-                    }
-                )
-
-                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-
-                SortSection(
-                    filterMode = filterMode,
-                    sortMode = sortMode,
-                    onSortChange = { sortMode = it }
-                )
-
-                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-
                 FilterContent(
                     filterMode = filterMode,
                     sortMode = sortMode,
@@ -90,9 +94,16 @@ fun PlayerSelectionDialog(
                         filterMode = FilterMode.TEAM_PLAYERS
                     }
                 )
-
             }
-        },
-        containerColor = Color.White
-    )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            TextButton(
+                onClick = onDismiss,
+                modifier = Modifier.align(Alignment.End)
+            ) {
+                Text("Cancel")
+            }
+        }
+    }
 }
