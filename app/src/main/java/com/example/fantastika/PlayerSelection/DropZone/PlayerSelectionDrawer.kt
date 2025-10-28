@@ -75,8 +75,6 @@ fun PlayerSelectionDrawer(
                 onSortChange = { sortMode = it }
             )
 
-            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()

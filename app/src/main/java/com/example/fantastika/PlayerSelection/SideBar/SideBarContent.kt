@@ -3,8 +3,6 @@ package com.example.fantastika.PlayerSelection.SideBar
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.fantastika.PlayerSelection.common.FilterContent
@@ -55,8 +53,6 @@ fun SidebarContent(
             sortMode = sortMode,
             onSortChange = { sortMode = it }
         )
-        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-
 
         // Content based on filter
         FilterContent(

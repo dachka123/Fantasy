@@ -60,7 +60,6 @@ fun IphoneDrawer(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomCenter
         ) {
-            // Dim background overlay
             if (dimBackground) {
                 Box(
                     modifier = Modifier
@@ -73,7 +72,6 @@ fun IphoneDrawer(
                 )
             }
 
-            // Animated drawer card
             AnimatedVisibility(
                 visible = visible,
                 enter = slideInVertically(

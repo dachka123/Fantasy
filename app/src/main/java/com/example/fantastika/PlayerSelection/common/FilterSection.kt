@@ -1,20 +1,35 @@
 package com.example.fantastika.PlayerSelection.common
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
 
 @Composable
 fun FilterSection(
     filterMode: FilterMode,
     selectedTeam: String?,
     onFilterChange: (FilterMode) -> Unit,
-    onBackToTeams: () -> Unit
+    onBackToTeams: () -> Unit,
+    segmentBackgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant
 ) {
     if (filterMode == FilterMode.TEAM_PLAYERS) {
         // Back Button
@@ -38,32 +53,82 @@ fun FilterSection(
         }
     } else {
         // Filter Checkboxes
-        Row(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 12.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+                .padding(bottom = 12.dp, start = 16.dp, end = 16.dp)
+                .height(40.dp)
+                .clip(RoundedCornerShape(100.dp))
+                .background(segmentBackgroundColor),
+            contentAlignment = Alignment.Center
         ) {
             Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Checkbox(
-                    checked = filterMode == FilterMode.PLAYERS,
-                    onCheckedChange = { if (it) onFilterChange(FilterMode.PLAYERS) }
+                // Players Segment
+                val isPlayersSelected = filterMode == FilterMode.PLAYERS
+                val playersBackgroundColor by animateColorAsState(
+                    targetValue = if (isPlayersSelected) Color.White else Color.Transparent,
+                    animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy),
+                    label = "playersBackground"
                 )
-                Text("Players", style = MaterialTheme.typography.bodyMedium)
-            }
+                val playersTextColor by animateColorAsState(
+                    targetValue = if (isPlayersSelected) Color.Black else Color.Black.copy(0.5f),
+                    animationSpec = tween(durationMillis = 300),
+                    label = "playersText"
+                )
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.weight(1f)
-            ) {
-                Checkbox(
-                    checked = filterMode == FilterMode.TEAMS,
-                    onCheckedChange = { if (it) onFilterChange(FilterMode.TEAMS) }
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(32.dp)
+                        .clip(RoundedCornerShape(100.dp))
+                        .background(playersBackgroundColor)
+                        .clickable { onFilterChange(FilterMode.PLAYERS) },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Players",
+                        style = TextStyle(fontSize = 14.sp),
+                        color = playersTextColor,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+
+                // Teams Segment
+                val isTeamsSelected = filterMode == FilterMode.TEAMS
+                val teamsBackgroundColor by animateColorAsState(
+                    targetValue = if (isTeamsSelected) Color.White else Color.Transparent,
+                    animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy),
+                    label = "teamsBackground"
                 )
-                Text("Teams", style = MaterialTheme.typography.bodyMedium)
+                val teamsTextColor by animateColorAsState(
+                    targetValue = if (isTeamsSelected) Color.Black else Color.Black.copy(0.5f),
+                    animationSpec = tween(durationMillis = 300),
+                    label = "teamsText"
+                )
+
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(32.dp)
+                        .clip(RoundedCornerShape(100.dp))
+                        .background(teamsBackgroundColor)
+                        .clickable { onFilterChange(FilterMode.TEAMS) },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Teams",
+                        style = TextStyle(fontSize = 14.sp),
+                        color = teamsTextColor,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         }
     }

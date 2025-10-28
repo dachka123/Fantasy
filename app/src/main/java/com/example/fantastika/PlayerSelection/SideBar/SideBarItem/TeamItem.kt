@@ -2,15 +2,17 @@ package com.example.fantastika.PlayerSelection.SideBar.SideBarItem
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -23,26 +25,38 @@ fun TeamItem(
     label: String,
     onClick: () -> Unit
 ) {
-    Card(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp)
-            .background(Color.Transparent),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFBDBDBD))
+            .padding(horizontal = 16.dp, vertical = 6.dp)
+
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp, horizontal = 8.dp)
+                .clip(RoundedCornerShape(24.dp))
+                .background(Color.White)
+                .border(2.dp, Color.Black, RoundedCornerShape(24.dp))
+                .padding(vertical = 12.dp, horizontal = 12.dp)
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.imagelogo),
-                contentDescription = "Team Logo",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.size(40.dp)
-            )
+            Box(
+                modifier = Modifier
+                    .size(56.dp)
+                    .clip(CircleShape)
+                    .background(Color.Black)
+                    .padding(2.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.imagelogo),
+                    contentDescription = "Player Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(CircleShape)
+                )
+            }
             Spacer(modifier = Modifier.width(12.dp))
             Text(
                 label,
