@@ -32,12 +32,11 @@ fun FilterContent(
     ) {
         when (filterMode) {
             FilterMode.PLAYERS -> {
-                val sortedPlayers = remember(sortMode,allPlayers) {
-                    when (sortMode) {
-                        SortMode.NAME -> allPlayers.sortedBy { it.name }
-                        SortMode.PRICE -> allPlayers.sortedByDescending { it.price }
-                    }
+                val sortedPlayers = when (sortMode) {
+                    SortMode.NAME -> allPlayers.sortedBy { it.name }
+                    SortMode.PRICE -> allPlayers.sortedByDescending { it.price }
                 }
+
                 sortedPlayers.forEach { player ->
                     val isUsed = usedItems.contains(player.name)
                     SidebarItem(
@@ -65,12 +64,10 @@ fun FilterContent(
             }
 
             FilterMode.TEAM_PLAYERS -> {
-                val sortedTeamPlayers = remember(sortMode, selectedTeam,allPlayers) {
-                    val teamPlayers = allPlayers.filter { it.team == selectedTeam }
-                    when (sortMode) {
-                        SortMode.NAME -> teamPlayers.sortedBy { it.name }
-                        SortMode.PRICE -> teamPlayers.sortedByDescending { it.price }
-                    }
+                val teamPlayers = allPlayers.filter { it.team == selectedTeam }
+                val sortedTeamPlayers = when (sortMode) {
+                    SortMode.NAME -> teamPlayers.sortedBy { it.name }
+                    SortMode.PRICE -> teamPlayers.sortedByDescending { it.price }
                 }
                 sortedTeamPlayers.forEach { player ->
                     val isUsed = usedItems.contains(player.name)

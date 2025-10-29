@@ -25,6 +25,7 @@ import com.example.fantastika.PlayerSelection.DropZone.DropZone
 import com.example.fantastika.PlayerSelection.SideBar.SideBarViewModel
 import com.example.fantastika.PlayerSelection.SideBar.SidebarContent
 import com.example.fantastika.PlayerSelection.SideBar.ThemeSwitcher
+import com.example.fantastika.PlayerSelection.data.allPlayers
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,6 +58,7 @@ fun SideBarDragDrop(
         drawerContent = {
             ModalDrawerSheet(Modifier.width(350.dp)) {
                 SidebarContent(
+                    allPlayers = allPlayers,
                     usedItems = usedItems,
                     onItemDragStart = {
                         scope.launch { drawerState.close() }

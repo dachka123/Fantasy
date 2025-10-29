@@ -28,11 +28,6 @@ fun PlayerSelectionDrawer(
     var selectedTeam by remember { mutableStateOf<String?>(null) }
     var sortMode by remember { mutableStateOf(SortMode.NAME) }
 
-    // Reset sort to NAME when changing filter modes
-    /*LaunchedEffect(filterMode) {
-        sortMode = SortMode.NAME
-    }*/
-
     IphoneDrawer(
         onDismiss = onDismiss,
         heightFraction = 0.85f,
@@ -69,18 +64,13 @@ fun PlayerSelectionDrawer(
 
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-            SortSection(
-                filterMode = filterMode,
-                sortMode = sortMode,
-                onSortChange = { sortMode = it }
-            )
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
             ) {
                 FilterContent(
+                    modifier = Modifier.fillMaxSize(),
                     filterMode = filterMode,
                     sortMode = sortMode,
                     allPlayers = allPlayers,
@@ -92,6 +82,19 @@ fun PlayerSelectionDrawer(
                         filterMode = FilterMode.TEAM_PLAYERS
                     }
                 )
+
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    SortSection(
+                        filterMode = filterMode,
+                        sortMode = sortMode,
+                        onSortChange = { sortMode = it }
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(8.dp))

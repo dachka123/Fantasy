@@ -52,7 +52,6 @@ fun FilterSection(
             )
         }
     } else {
-        // Filter Checkboxes
         Box(
             modifier = Modifier
                 .fillMaxWidth()

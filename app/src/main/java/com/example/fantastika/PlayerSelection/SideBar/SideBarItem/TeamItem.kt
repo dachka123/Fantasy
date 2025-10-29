@@ -36,7 +36,7 @@ fun TeamItem(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(24.dp))
                 .background(Color.White)
-                .border(2.dp, Color.Black, RoundedCornerShape(24.dp))
+                .border(1.dp, Color.Black, RoundedCornerShape(24.dp))
                 .padding(vertical = 12.dp, horizontal = 12.dp)
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically
