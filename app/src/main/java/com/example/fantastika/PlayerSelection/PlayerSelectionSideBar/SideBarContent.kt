@@ -1,18 +1,17 @@
-package com.example.fantastika.PlayerSelection.SideBar
+package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.fantastika.PlayerSelection.common.FilterContent
-import com.example.fantastika.PlayerSelection.common.FilterMode
-import com.example.fantastika.PlayerSelection.common.FilterSection
-import com.example.fantastika.PlayerSelection.common.SortMode
-import com.example.fantastika.PlayerSelection.common.SortSection
-import com.example.fantastika.PlayerSelection.data.Player
+import com.example.fantastika.PlayerSelection.Common.FilterContent
+import com.example.fantastika.PlayerSelection.Common.FilterMode
+import com.example.fantastika.PlayerSelection.Common.FilterSection
+import com.example.fantastika.PlayerSelection.Common.SortMode
+import com.example.fantastika.PlayerSelection.Common.SortSection
+import com.example.fantastika.PlayerSelection.Data.Player
 
 
 @Composable
@@ -23,12 +22,8 @@ fun SidebarContent(
 ) {
     var filterMode by remember { mutableStateOf(FilterMode.PLAYERS) }
     var selectedTeam by remember { mutableStateOf<String?>(null) }
-    var sortMode by rememberSaveable { mutableStateOf(SortMode.NAME) }
+    var sortMode by remember { mutableStateOf(SortMode.NAME) }
 
-
-    LaunchedEffect(filterMode) {
-        sortMode = SortMode.PRICE
-    }
 
     Column(
         modifier = Modifier

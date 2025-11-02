@@ -2,7 +2,15 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    //id("com.apollographql.apollo3").version("3.8.6")
 }
+
+/*apollo {
+    service("service") {
+        packageName.set("com.example.fantastika")
+    }
+}*/
+
 
 android {
     namespace = "com.example.fantastika"
@@ -47,6 +55,9 @@ dependencies {
 
     implementation(libs.androidx.compose.material.icons.extended.android)
 
+    implementation(libs.androidx.compose.ui.text)
+
+    //implementation(libs.apollo.runtime)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -59,6 +70,7 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.material.core)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

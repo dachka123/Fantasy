@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.SideBar
+package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -2,6 +2,7 @@
 
 package com.example.fantastika
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -10,8 +11,6 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,26 +21,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.fantastika.PlayerSelection.DropZone.DropZone
-import com.example.fantastika.PlayerSelection.SideBar.SideBarViewModel
-import com.example.fantastika.PlayerSelection.SideBar.SidebarContent
-import com.example.fantastika.PlayerSelection.SideBar.ThemeSwitcher
-import com.example.fantastika.PlayerSelection.data.allPlayers
-import kotlinx.coroutines.launch
+import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarViewModel
+import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SidebarContent
+import com.example.fantastika.PlayerSelection.Data.allPlayers
+import com.example.fantastika.Common.SideBarNav
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SideBarDragDrop(
     viewModel: SideBarViewModel = viewModel(),
     darkTheme: Boolean,
-    onThemeUpdated: () -> Unit
+    onThemeUpdated: () -> Unit,
+    onBackPressed: () -> Unit
 ) {
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-
     val droppedZones by viewModel.droppedZones.collectAsState()
     val usedItems by viewModel.usedItems.collectAsState()
     var rotationAngle by remember { mutableStateOf(0f) }
-    //var darkTheme by remember { mutableStateOf(false) }
+
+    BackHandler {
+        onBackPressed()
+    }
 
     LaunchedEffect(Unit) {
         animate(
@@ -53,40 +52,23 @@ fun SideBarDragDrop(
         }
     }
 
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            ModalDrawerSheet(Modifier.width(350.dp)) {
-                SidebarContent(
-                    allPlayers = allPlayers,
-                    usedItems = usedItems,
-                    onItemDragStart = {
-                        scope.launch { drawerState.close() }
-                    }
-                )
-            }
-        }
-    ) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text("Fantastika") },
-                    navigationIcon = {
-                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Menu")
-                        }
-                    },
-                    actions = {
-                        ThemeSwitcher(
-                            darkTheme = darkTheme,
-                            size = 30.dp,
-                            onClick = onThemeUpdated
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                    }
-                )
-            }
-        ) { padding ->
+    SideBarNav(
+        title = "Fantastika",
+        darkTheme = darkTheme,
+        onThemeUpdated = onThemeUpdated,
+        onBackPressed = onBackPressed,
+
+        drawerContent = { closeDrawer ->
+            SidebarContent(
+                allPlayers = allPlayers,
+                usedItems = usedItems,
+                onItemDragStart = {
+                    closeDrawer()
+                }
+            )
+        },
+
+        screenContent = { padding ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -200,12 +182,12 @@ fun SideBarDragDrop(
                                     modifier = Modifier
                                         .fillMaxSize()
                                         .padding(start = 45.dp),
-                                ){
-                                    Row (
+                                ) {
+                                    Row(
                                         modifier = Modifier
                                             .fillMaxSize(),
                                         horizontalArrangement = Arrangement.spacedBy(15.dp)
-                                    ){
+                                    ) {
                                         DropZone(
                                             droppedItem = droppedZones[3],
                                             onItemDropped = { viewModel.onItemDropped(3, it) },
@@ -226,5 +208,5 @@ fun SideBarDragDrop(
                 }
             }
         }
-    }
+    )
 }

@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.SideBar
+package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar
 
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.animateDpAsState
@@ -13,7 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Nightlight
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.ui.theme.FantastikaTheme
 
 @Composable
 fun ThemeSwitcher(
@@ -45,7 +45,7 @@ fun ThemeSwitcher(
         .height(size)
         .clip(shape = parentShape)
         .clickable { onClick() }
-        .background(MaterialTheme.colorScheme.secondaryContainer)
+        .background(FantastikaTheme.color.secondary)
     ) {
         Box(
             modifier = Modifier
@@ -53,14 +53,14 @@ fun ThemeSwitcher(
                 .offset(x = offset)
                 .padding(all = padding)
                 .clip(shape = toggleShape)
-                .background(MaterialTheme.colorScheme.primary)
+                .background(FantastikaTheme.color.primary)
         ) {}
         Row(
             modifier = Modifier
                 .border(
                     border = BorderStroke(
                         width = borderWidth,
-                        color = MaterialTheme.colorScheme.primary
+                        color = FantastikaTheme.color.primary
                     ),
                     shape = parentShape
                 )
@@ -73,8 +73,8 @@ fun ThemeSwitcher(
                     modifier = Modifier.size(iconSize),
                     imageVector = Icons.Default.Nightlight,
                     contentDescription = "Theme Icon",
-                    tint = if (darkTheme) MaterialTheme.colorScheme.secondaryContainer
-                    else MaterialTheme.colorScheme.primary
+                    tint = if (darkTheme) FantastikaTheme.color.secondary
+                    else FantastikaTheme.color.primary
                 )
             }
             Box(
@@ -85,8 +85,8 @@ fun ThemeSwitcher(
                     modifier = Modifier.size(iconSize),
                     imageVector = Icons.Default.LightMode,
                     contentDescription = "Theme Icon",
-                    tint = if (darkTheme) MaterialTheme.colorScheme.primary
-                    else MaterialTheme.colorScheme.secondaryContainer
+                    tint = if (darkTheme) FantastikaTheme.color.primary
+                    else FantastikaTheme.color.secondary
                 )
             }
         }

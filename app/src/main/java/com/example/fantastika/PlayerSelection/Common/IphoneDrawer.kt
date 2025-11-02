@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.common
+package com.example.fantastika.PlayerSelection.Common
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -31,12 +31,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.fantastika.ui.theme.FantastikaTheme
 
 @Composable
 fun IphoneDrawer(
     onDismiss: () -> Unit,
     heightFraction: Float = 0.8f,
-    backgroundColor: Color = Color.White,
+    backgroundColor: Color = FantastikaTheme.color.background,
     dragThreshold: Float = 150f,
     cornerRadius: Dp = 12.dp,
     dimBackground: Boolean = true,

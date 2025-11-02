@@ -30,8 +30,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.fantastika.PlayerSelection.common.DrawerDragHandle
-import com.example.fantastika.PlayerSelection.common.IphoneDrawer
+import com.example.fantastika.PlayerSelection.Common.DrawerDragHandle
+import com.example.fantastika.PlayerSelection.Common.IphoneDrawer
 import com.example.fantastika.R
 
 @Composable
@@ -45,6 +45,7 @@ fun PlayerDetailsBottomDialog(
     IphoneDrawer(
         onDismiss = onDismiss,
         heightFraction = 0.8f,
+        //backgroundColor = FantastikaTheme.color.background
         backgroundColor = Color.White
     ) {
         Box {

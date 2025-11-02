@@ -20,13 +20,13 @@ import androidx.compose.ui.draganddrop.mimeTypes
 import androidx.compose.ui.draganddrop.toAndroidDragEvent
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fantastika.PlayerSelection.DropZone.PlayerDetails.PlayerDetailsBottomDialog
-import com.example.fantastika.PlayerSelection.data.allPlayers
+import com.example.fantastika.PlayerSelection.Data.allPlayers
+import com.example.fantastika.ui.theme.FantastikaTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -37,6 +37,7 @@ fun DropZone(
     usedItems: List<String>,
 ) {
 
+    val onBackground = FantastikaTheme.color.onBackground
     var showDialog by remember { mutableStateOf(false) }
     var showPlayerDetailsDialog by remember { mutableStateOf(false) }
 
@@ -47,19 +48,19 @@ fun DropZone(
             .drawBehind {
                 for (i in 1..2) {
                     drawRoundRect(
-                        color = Color.White.copy(alpha = 0.3f / i),
+                        color = onBackground.copy(alpha = 0.3f / i),
                         cornerRadius = CornerRadius(12.dp.toPx()),
                         style = Stroke(width = (8.dp * i).toPx())
                     )
                 }
             }
             .background(
-                color = Color.Black,
+                color = FantastikaTheme.color.background,
                 shape = RoundedCornerShape(12.dp)
             )
             .border(
                 width = 2.dp,
-                color = Color.White,
+                color = FantastikaTheme.color.onBackground,
                 shape = RoundedCornerShape(12.dp)
             )
             /*.shadow(
@@ -111,7 +112,7 @@ fun DropZone(
                 Icon(
                     imageVector = Icons.Filled.Close,
                     contentDescription = "Remove item",
-                    tint = Color.Red,
+                    tint = MaterialTheme.colorScheme.error,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(4.dp)
@@ -124,7 +125,7 @@ fun DropZone(
                 text = "+",
                 fontSize = 23.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White,
+                color = FantastikaTheme.color.onBackground,
                 modifier = Modifier.align(Alignment.Center)
             )
         }

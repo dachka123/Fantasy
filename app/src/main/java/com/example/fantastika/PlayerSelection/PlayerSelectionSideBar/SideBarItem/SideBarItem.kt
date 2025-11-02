@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalFoundationApi::class)
 
-package com.example.fantastika.PlayerSelection.SideBar.SideBarItem
+package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarItem
 
 import android.content.ClipData
 import android.content.ClipDescription
@@ -27,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draganddrop.DragAndDropTransferData
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,6 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fantastika.R
+import com.example.fantastika.ui.theme.FantastikaTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -47,7 +47,7 @@ fun SidebarItem(
     isDraggable: Boolean = true,
     onDragStart: () -> Unit = {}
 ) {
-    val backgroundColor = if (isUsed) Color(0xFFD6D6D6) else Color(0xF89D9797)
+    val backgroundColor = if (isUsed) FantastikaTheme.color.secondary else FantastikaTheme.color.background
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,7 +58,7 @@ fun SidebarItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, Color.Black, RoundedCornerShape(24.dp))
+                .border(1.dp, FantastikaTheme.color.onBackground, RoundedCornerShape(24.dp))
                 .then(
                     if (!isUsed && isDraggable) {
                         Modifier.dragAndDropSource(block = {
@@ -89,9 +89,9 @@ fun SidebarItem(
                 modifier = Modifier
                     .fillMaxHeight()
                     .width(56.dp)
-                    .height(65.dp)
-                    .clip(RoundedCornerShape(topStart = 24.dp, bottomStart = 24.dp)) // Clip to match the card's left edge
-                    .background(Color.Black)
+                    .height(70.dp)
+                    .clip(RoundedCornerShape(topStart = 24.dp, bottomStart = 24.dp))
+                    .background(FantastikaTheme.color.onBackground)
             )
             Spacer(modifier = Modifier.width(12.dp))
             Row(
@@ -104,17 +104,19 @@ fun SidebarItem(
                     style = MaterialTheme.typography.bodyLarge,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    color = FantastikaTheme.color.onPrimary
                 )
                 Text(
                     text = team,
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                    modifier = Modifier.padding(end = 5.dp)
+                    modifier = Modifier.padding(end = 5.dp),
+                    color = FantastikaTheme.color.onPrimary
                 )
                 Text(
                     text = "$$price",
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                    color = Color(0xFF1B5E20)
+                    color = FantastikaTheme.color.onPrimary
                 )
             }
         }

@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.common
+package com.example.fantastika.PlayerSelection.Common
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
@@ -7,10 +7,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.unit.dp
-import com.example.fantastika.PlayerSelection.SideBar.SideBarItem.SidebarItem
-import com.example.fantastika.PlayerSelection.SideBar.SideBarItem.TeamItem
-import com.example.fantastika.PlayerSelection.data.Player
-import com.example.fantastika.PlayerSelection.data.allTeams
+import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarItem.SidebarItem
+import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarItem.TeamItem
+import com.example.fantastika.PlayerSelection.Data.Player
+import com.example.fantastika.PlayerSelection.Data.allTeams
 
 @Composable
 fun FilterContent(

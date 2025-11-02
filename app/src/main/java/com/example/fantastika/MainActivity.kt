@@ -8,6 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.navigation.compose.rememberNavController
+import com.example.fantastika.Navigation.AppNavHost
 import com.example.fantastika.ui.theme.FantastikaTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,8 +18,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             var darkTheme by remember { mutableStateOf(false) }
+            val navController = rememberNavController()
             FantastikaTheme(darkTheme = darkTheme) {
-                SideBarDragDrop(
+                AppNavHost(
+                    navController = navController,
                     darkTheme = darkTheme,
                     onThemeUpdated = { darkTheme = !darkTheme }
                 )

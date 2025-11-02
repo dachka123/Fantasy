@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.common
+package com.example.fantastika.PlayerSelection.Common
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.ui.theme.FantastikaTheme
 
 @Composable
 fun SortSection(
@@ -30,7 +31,7 @@ fun SortSection(
                         )
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
+                        containerColor = FantastikaTheme.color.primary
                     ),
                 ) {
                     Row(
@@ -41,7 +42,7 @@ fun SortSection(
                         Icon(
                             imageVector = Icons.Default.SwapVert,
                             contentDescription = "Sort",
-                            tint = MaterialTheme.colorScheme.onPrimary
+                            tint = FantastikaTheme.color.onPrimary
                         )
                     }
                 }

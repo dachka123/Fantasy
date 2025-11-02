@@ -5,16 +5,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.fantastika.PlayerSelection.common.DrawerDragHandle
-import com.example.fantastika.PlayerSelection.common.FilterContent
-import com.example.fantastika.PlayerSelection.common.FilterMode
-import com.example.fantastika.PlayerSelection.common.FilterSection
-import com.example.fantastika.PlayerSelection.common.IphoneDrawer
-import com.example.fantastika.PlayerSelection.common.SortMode
-import com.example.fantastika.PlayerSelection.common.SortSection
-import com.example.fantastika.PlayerSelection.data.Player
+import com.example.fantastika.PlayerSelection.Common.DrawerDragHandle
+import com.example.fantastika.PlayerSelection.Common.FilterContent
+import com.example.fantastika.PlayerSelection.Common.FilterMode
+import com.example.fantastika.PlayerSelection.Common.FilterSection
+import com.example.fantastika.PlayerSelection.Common.IphoneDrawer
+import com.example.fantastika.PlayerSelection.Common.SortMode
+import com.example.fantastika.PlayerSelection.Common.SortSection
+import com.example.fantastika.PlayerSelection.Data.Player
+import com.example.fantastika.ui.theme.FantastikaTheme
 
 
 @Composable
@@ -31,7 +31,7 @@ fun PlayerSelectionDrawer(
     IphoneDrawer(
         onDismiss = onDismiss,
         heightFraction = 0.85f,
-        backgroundColor = Color.White
+        backgroundColor = FantastikaTheme.color.background
     ) {
         Column(
             modifier = Modifier
