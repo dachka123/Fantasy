@@ -5,6 +5,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.fantastika.PlayerSelection.Common.DrawerDragHandle
 import com.example.fantastika.PlayerSelection.Common.FilterContent
@@ -14,7 +15,6 @@ import com.example.fantastika.PlayerSelection.Common.IphoneDrawer
 import com.example.fantastika.PlayerSelection.Common.SortMode
 import com.example.fantastika.PlayerSelection.Common.SortSection
 import com.example.fantastika.PlayerSelection.Data.Player
-import com.example.fantastika.ui.theme.FantastikaTheme
 
 
 @Composable
@@ -31,7 +31,7 @@ fun PlayerSelectionDrawer(
     IphoneDrawer(
         onDismiss = onDismiss,
         heightFraction = 0.85f,
-        backgroundColor = FantastikaTheme.color.background
+        backgroundColor = Color.White
     ) {
         Column(
             modifier = Modifier
@@ -49,7 +49,8 @@ fun PlayerSelectionDrawer(
                     FilterMode.TEAM_PLAYERS -> selectedTeam ?: "Team Players"
                 },
                 style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(bottom = 16.dp),
+                color = Color.Black
             )
 
             FilterSection(

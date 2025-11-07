@@ -13,12 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.fantastika.R
-import com.example.fantastika.ui.theme.FantastikaTheme
 
 @Composable
 fun TeamItem(
@@ -29,14 +29,13 @@ fun TeamItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 6.dp)
-
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(24.dp))
-                .background(FantastikaTheme.color.background)
-                .border(1.dp, FantastikaTheme.color.onBackground, RoundedCornerShape(24.dp))
+                .background(Color.White)
+                .border(1.dp, Color.Black, RoundedCornerShape(24.dp))
                 .padding(vertical = 12.dp, horizontal = 12.dp)
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically
@@ -45,7 +44,7 @@ fun TeamItem(
                 modifier = Modifier
                     .size(56.dp)
                     .clip(CircleShape)
-                    .background(FantastikaTheme.color.onBackground)
+                    .background(Color.Black)
                     .padding(2.dp)
             ) {
                 Image(
@@ -63,7 +62,8 @@ fun TeamItem(
                 style = MaterialTheme.typography.bodyLarge,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                color = Color.Black
             )
         }
     }

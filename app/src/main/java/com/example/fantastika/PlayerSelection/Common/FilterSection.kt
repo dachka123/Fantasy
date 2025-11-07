@@ -21,7 +21,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.fantastika.ui.theme.FantastikaTheme
 
 
 @Composable
@@ -30,7 +29,7 @@ fun FilterSection(
     selectedTeam: String?,
     onFilterChange: (FilterMode) -> Unit,
     onBackToTeams: () -> Unit,
-    segmentBackgroundColor: Color = FantastikaTheme.color.secondary
+    segmentBackgroundColor: Color = Color(0xFFB9B9BE)
 ) {
     if (filterMode == FilterMode.TEAM_PLAYERS) {
         // Back Button
@@ -43,13 +42,15 @@ fun FilterSection(
             IconButton(onClick = onBackToTeams) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back to Teams"
+                    contentDescription = "Back to Teams",
+                    tint = Color.Black
                 )
             }
             Text(
                 text = selectedTeam ?: "Back to Teams",
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = 8.dp),
+                color = Color.Black
             )
         }
     } else {
@@ -71,12 +72,12 @@ fun FilterSection(
                 // Players Segment
                 val isPlayersSelected = filterMode == FilterMode.PLAYERS
                 val playersBackgroundColor by animateColorAsState(
-                    targetValue = if (isPlayersSelected) FantastikaTheme.color.background else Color.Transparent,
+                    targetValue = if (isPlayersSelected) Color.White else Color.Transparent,
                     animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy),
                     label = "playersBackground"
                 )
                 val playersTextColor by animateColorAsState(
-                    targetValue = if (isPlayersSelected) FantastikaTheme.color.onBackground else FantastikaTheme.color.onBackground.copy(0.5f),
+                    targetValue = if (isPlayersSelected) Color.Black else Color.White,
                     animationSpec = tween(durationMillis = 300),
                     label = "playersText"
                 )
@@ -102,12 +103,12 @@ fun FilterSection(
                 // Teams Segment
                 val isTeamsSelected = filterMode == FilterMode.TEAMS
                 val teamsBackgroundColor by animateColorAsState(
-                    targetValue = if (isTeamsSelected) FantastikaTheme.color.background else Color.Transparent,
+                    targetValue = if (isTeamsSelected) Color.White else Color.Transparent,
                     animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy),
                     label = "teamsBackground"
                 )
                 val teamsTextColor by animateColorAsState(
-                    targetValue = if (isTeamsSelected) FantastikaTheme.color.onBackground else FantastikaTheme.color.onBackground.copy(0.5f),
+                    targetValue = if (isTeamsSelected) Color.Black else Color.White,
                     animationSpec = tween(durationMillis = 300),
                     label = "teamsText"
                 )

@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draganddrop.DragAndDropTransferData
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -47,7 +48,7 @@ fun SidebarItem(
     isDraggable: Boolean = true,
     onDragStart: () -> Unit = {}
 ) {
-    val backgroundColor = if (isUsed) FantastikaTheme.color.secondary else FantastikaTheme.color.background
+    val backgroundColor = if (isUsed) Color.White else Color(0xFFB9B9BE)
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,7 +59,7 @@ fun SidebarItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, FantastikaTheme.color.onBackground, RoundedCornerShape(24.dp))
+                .border(1.dp, Color.Black, RoundedCornerShape(24.dp))
                 .then(
                     if (!isUsed && isDraggable) {
                         Modifier.dragAndDropSource(block = {
@@ -91,7 +92,7 @@ fun SidebarItem(
                     .width(56.dp)
                     .height(70.dp)
                     .clip(RoundedCornerShape(topStart = 24.dp, bottomStart = 24.dp))
-                    .background(FantastikaTheme.color.onBackground)
+                    //.background(FantastikaTheme.color.onBackground)
             )
             Spacer(modifier = Modifier.width(12.dp))
             Row(
@@ -105,18 +106,18 @@ fun SidebarItem(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f),
-                    color = FantastikaTheme.color.onPrimary
+                    color = Color.Black
                 )
                 Text(
                     text = team,
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                     modifier = Modifier.padding(end = 5.dp),
-                    color = FantastikaTheme.color.onPrimary
+                    color = Color.Black
                 )
                 Text(
                     text = "$$price",
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                    color = FantastikaTheme.color.onPrimary
+                    color = Color.Black
                 )
             }
         }
