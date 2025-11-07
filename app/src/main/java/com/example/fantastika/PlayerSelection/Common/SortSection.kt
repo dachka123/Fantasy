@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.fantastika.ui.theme.FantastikaTheme
 
@@ -37,12 +38,15 @@ fun SortSection(
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(text = "Sort")
+                        Text(
+                            text = "Sort",
+                            color = Color.White
+                        )
                         Spacer(modifier = Modifier.width(6.dp))
                         Icon(
                             imageVector = Icons.Default.SwapVert,
                             contentDescription = "Sort",
-                            tint = FantastikaTheme.color.onPrimary
+                            tint = Color.White
                         )
                     }
                 }

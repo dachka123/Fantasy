@@ -1,9 +1,11 @@
 package com.example.fantastika.Common
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
@@ -18,15 +20,17 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SideBarNav(
-    title: String,
+    //title: String,
     darkTheme: Boolean,
     onThemeUpdated: () -> Unit,
     onBackPressed: (() -> Unit)? = null,
     drawerContent: @Composable (closeDrawer: () -> Unit) -> Unit,
     screenContent: @Composable (PaddingValues) -> Unit,
+    topBarContent: @Composable () -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
 
     val closeDrawer: () -> Unit = { scope.launch { drawerState.close() } }
 
@@ -42,7 +46,10 @@ fun SideBarNav(
             topBar = {
                 TopAppBar(
                     title = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.horizontalScroll(scrollState)
+                        ) {
                             if (onBackPressed != null) {
                                 IconButton(onClick = onBackPressed) {
                                     Icon(
@@ -53,7 +60,8 @@ fun SideBarNav(
                                 Spacer(modifier = Modifier.width(8.dp))
                             }
 
-                            Text(title)
+                            //Text(title)
+                            topBarContent()
                         }
                     },
                     navigationIcon = {

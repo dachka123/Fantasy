@@ -57,8 +57,8 @@ fun FixtureBoxes(
                     FantastikaTheme.color.primary,
                     shape = RoundedCornerShape(12.dp)
                 )
-                .padding(32.dp)
                 .clickable(onClick = onClick)
+                .padding(32.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxSize(),

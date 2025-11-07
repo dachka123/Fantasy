@@ -51,7 +51,7 @@ fun SidebarItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
+            .padding(vertical = 10.dp)
             .clip(RoundedCornerShape(24.dp))
             .background(backgroundColor)
     ) {

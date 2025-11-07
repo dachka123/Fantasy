@@ -25,6 +25,7 @@ import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarView
 import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SidebarContent
 import com.example.fantastika.PlayerSelection.Data.allPlayers
 import com.example.fantastika.Common.SideBarNav
+import com.example.fantastika.LandingPage.Components.TopBarContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +54,8 @@ fun SideBarDragDrop(
     }
 
     SideBarNav(
-        title = "Fantastika",
+        //title = "Fantastika",
+        topBarContent = { TopBarContent() },
         darkTheme = darkTheme,
         onThemeUpdated = onThemeUpdated,
         onBackPressed = onBackPressed,
