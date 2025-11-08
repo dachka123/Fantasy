@@ -34,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.R
 import com.example.fantastika.ui.theme.FantastikaTheme
 
@@ -52,14 +53,14 @@ fun SidebarItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 10.dp)
-            .clip(RoundedCornerShape(24.dp))
+            .padding(vertical = Dimens.spacing10)
+            .clip(RoundedCornerShape(Dimens.spacing24))
             .background(backgroundColor)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, Color.Black, RoundedCornerShape(24.dp))
+                .border(Dimens.spacing1, Color.Black, RoundedCornerShape(Dimens.spacing24))
                 .then(
                     if (!isUsed && isDraggable) {
                         Modifier.dragAndDropSource(block = {
@@ -89,16 +90,16 @@ fun SidebarItem(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxHeight()
-                    .width(56.dp)
-                    .height(70.dp)
-                    .clip(RoundedCornerShape(topStart = 24.dp, bottomStart = 24.dp))
+                    .width(Dimens.spacing56)
+                    .height(Dimens.spacing70)
+                    .clip(RoundedCornerShape(topStart = Dimens.spacing24, bottomStart = Dimens.spacing24))
                     //.background(FantastikaTheme.color.onBackground)
             )
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(Dimens.spacing24))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 24.dp, horizontal = 5.dp)
+                    .padding(vertical = Dimens.spacing24, horizontal = Dimens.spacing5)
             ) {
                 Text(
                     label,
@@ -111,7 +112,7 @@ fun SidebarItem(
                 Text(
                     text = team,
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                    modifier = Modifier.padding(end = 5.dp),
+                    modifier = Modifier.padding(end = Dimens.spacing5),
                     color = Color.Black
                 )
                 Text(

@@ -21,6 +21,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.fantastika.Common.Dimens
 
 
 @Composable
@@ -36,7 +37,7 @@ fun FilterSection(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 12.dp),
+                .padding(bottom = Dimens.spacing12),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onBackToTeams) {
@@ -49,7 +50,7 @@ fun FilterSection(
             Text(
                 text = selectedTeam ?: "Back to Teams",
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(start = 8.dp),
+                modifier = Modifier.padding(start = Dimens.spacing8),
                 color = Color.Black
             )
         }
@@ -57,16 +58,16 @@ fun FilterSection(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 12.dp, start = 16.dp, end = 16.dp)
-                .height(40.dp)
-                .clip(RoundedCornerShape(100.dp))
+                .padding(bottom = Dimens.spacing12, start = Dimens.spacing16, end = Dimens.spacing16)
+                .height(Dimens.spacing40)
+                .clip(RoundedCornerShape(Dimens.spacing100))
                 .background(segmentBackgroundColor),
             contentAlignment = Alignment.Center
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 4.dp),
+                    .padding(horizontal = Dimens.spacing5),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Players Segment
@@ -85,8 +86,8 @@ fun FilterSection(
                 Box(
                     modifier = Modifier
                         .weight(1f)
-                        .height(32.dp)
-                        .clip(RoundedCornerShape(100.dp))
+                        .height(Dimens.spacing32)
+                        .clip(RoundedCornerShape(Dimens.spacing100))
                         .background(playersBackgroundColor)
                         .clickable { onFilterChange(FilterMode.PLAYERS) },
                     contentAlignment = Alignment.Center
@@ -116,8 +117,8 @@ fun FilterSection(
                 Box(
                     modifier = Modifier
                         .weight(1f)
-                        .height(32.dp)
-                        .clip(RoundedCornerShape(100.dp))
+                        .height(Dimens.spacing32)
+                        .clip(RoundedCornerShape(Dimens.spacing100))
                         .background(teamsBackgroundColor)
                         .clickable { onFilterChange(FilterMode.TEAMS) },
                     contentAlignment = Alignment.Center

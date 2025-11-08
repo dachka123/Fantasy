@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.ui.theme.FantastikaTheme
 
 @Composable
@@ -22,7 +23,7 @@ fun SortSection(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 12.dp),
+                    .padding(bottom = Dimens.spacing12),
                 horizontalArrangement = Arrangement.Center
             ) {
                 Button(
@@ -42,7 +43,7 @@ fun SortSection(
                             text = "Sort",
                             color = Color.White
                         )
-                        Spacer(modifier = Modifier.width(6.dp))
+                        Spacer(modifier = Modifier.width(Dimens.spacing5))
                         Icon(
                             imageVector = Icons.Default.SwapVert,
                             contentDescription = "Sort",

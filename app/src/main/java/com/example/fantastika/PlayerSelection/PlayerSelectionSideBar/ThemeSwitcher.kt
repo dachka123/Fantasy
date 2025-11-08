@@ -20,15 +20,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.ui.theme.FantastikaTheme
 
 @Composable
 fun ThemeSwitcher(
     darkTheme: Boolean = false,
-    size: Dp = 150.dp,
+    size: Dp = Dimens.spacing150,
     iconSize: Dp = size / 3,
-    padding: Dp = 10.dp,
-    borderWidth: Dp = 1.dp,
+    padding: Dp = Dimens.spacing10,
+    borderWidth: Dp = Dimens.spacing1,
     parentShape: Shape = CircleShape,
     toggleShape: Shape = CircleShape,
     animationSpec: AnimationSpec<Dp> = tween(durationMillis = 300),

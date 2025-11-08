@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.ui.theme.FantastikaTheme
 
 @Composable
@@ -39,7 +40,7 @@ fun IphoneDrawer(
     heightFraction: Float = 0.8f,
     backgroundColor: Color = FantastikaTheme.color.background,
     dragThreshold: Float = 150f,
-    cornerRadius: Dp = 12.dp,
+    cornerRadius: Dp = Dimens.spacing12,
     dimBackground: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -106,7 +107,7 @@ fun IphoneDrawer(
                         },
                     shape = RoundedCornerShape(topStart = cornerRadius, topEnd = cornerRadius),
                     colors = CardDefaults.cardColors(containerColor = backgroundColor),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                    elevation = CardDefaults.cardElevation(defaultElevation = Dimens.spacing8)
                 ) {
                     content()
                 }
@@ -126,9 +127,9 @@ fun DrawerDragHandle(
     ) {
         Box(
             modifier = Modifier
-                .width(36.dp)
-                .height(5.dp)
-                .background(color, RoundedCornerShape(100.dp))
+                .width(Dimens.spacing35)
+                .height(Dimens.spacing5)
+                .background(color, RoundedCornerShape(Dimens.spacing100))
         )
     }
 }

@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.R
 import com.example.fantastika.ui.theme.FantastikaTheme
 
@@ -32,7 +33,7 @@ fun PlayerCard(
     rating: Int = 2
 ) {
     Card(
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(Dimens.spacing16),
         colors = CardDefaults.cardColors(containerColor = FantastikaTheme.color.secondary)
     ) {
         Box(Modifier.fillMaxSize()) {
@@ -42,7 +43,7 @@ fun PlayerCard(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 30.dp, top = 10.dp, end = 8.dp, bottom = 30.dp)
+                    .padding(start = Dimens.spacing30, top = Dimens.spacing10, end = Dimens.spacing8, bottom = Dimens.spacing30)
                     .align(Alignment.TopCenter)
             )
             Box(
@@ -50,15 +51,15 @@ fun PlayerCard(
                     .align(Alignment.CenterStart)
                     .offset(x = (-32).dp, y = (-14).dp)
                     .rotate(-360f)
-                    .width(150.dp)
-                    .height(30.dp),
+                    .width(Dimens.spacing150)
+                    .height(Dimens.spacing30),
                 contentAlignment = Alignment.Center
             ) {
-                Row(modifier = Modifier.padding(5.dp)) {
+                Row(modifier = Modifier.padding(Dimens.spacing5)) {
                     Text(
                         text = playerName,
                         modifier = Modifier
-                            .padding(horizontal = 2.dp)
+                            .padding(horizontal = Dimens.spacing2)
                             .graphicsLayer {
                                 rotationZ = 90f
                             }
@@ -77,11 +78,11 @@ fun PlayerCard(
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .padding(bottom = 10.dp)
-                    .height(28.dp)
+                    .padding(bottom = Dimens.spacing10)
+                    .height(Dimens.spacing28)
                     .clip(TrapeziumShape(cutAmount = 40f))
                     .background(FantastikaTheme.color.background)
-                    .padding(horizontal = 10.dp),
+                    .padding(horizontal = Dimens.spacing10),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -95,8 +96,8 @@ fun PlayerCard(
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .size(35.dp)
-                    .clip(RoundedCornerShape(topStart = 8.dp))
+                    .size(Dimens.spacing35)
+                    .clip(RoundedCornerShape(topStart = Dimens.spacing8))
                     .background(FantastikaTheme.color.secondary),
                 contentAlignment = Alignment.Center
             ) {

@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.PlayerSelection.Common.DrawerDragHandle
 import com.example.fantastika.PlayerSelection.Common.FilterContent
 import com.example.fantastika.PlayerSelection.Common.FilterMode
@@ -36,10 +37,10 @@ fun PlayerSelectionDrawer(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 16.dp)
+                .padding(horizontal = Dimens.spacing20, vertical = Dimens.spacing16)
         ) {
             DrawerDragHandle(
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(bottom = Dimens.spacing16)
             )
 
             Text(
@@ -49,7 +50,7 @@ fun PlayerSelectionDrawer(
                     FilterMode.TEAM_PLAYERS -> selectedTeam ?: "Team Players"
                 },
                 style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier.padding(bottom = 16.dp),
+                modifier = Modifier.padding(bottom = Dimens.spacing16),
                 color = Color.Black
             )
 
@@ -63,7 +64,7 @@ fun PlayerSelectionDrawer(
                 }
             )
 
-            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+            HorizontalDivider(modifier = Modifier.padding(vertical = Dimens.spacing8))
 
             Box(
                 modifier = Modifier
@@ -88,7 +89,7 @@ fun PlayerSelectionDrawer(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .padding(Dimens.spacing16)
                 ) {
                     SortSection(
                         filterMode = filterMode,
@@ -98,7 +99,7 @@ fun PlayerSelectionDrawer(
                 }
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Dimens.spacing8))
 
             TextButton(
                 onClick = onDismiss,

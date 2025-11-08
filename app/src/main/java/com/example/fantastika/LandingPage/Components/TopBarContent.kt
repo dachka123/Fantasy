@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.Common.StyledBox
 import com.example.fantastika.ui.theme.FantastikaTheme
 
@@ -32,11 +33,11 @@ fun TopBarContent(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End
     ) {
-        Spacer(modifier = Modifier.width(35.dp))
+        Spacer(modifier = Modifier.width(Dimens.spacing35))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.spacing12)
         ) {
             StyledBox(
                 backgroundColor = FantastikaTheme.color.orange,
@@ -46,13 +47,13 @@ fun TopBarContent(
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Dimens.spacing5)
                 ) {
                     Icon(
                         imageVector = Icons.Filled.MonetizationOn,
                         contentDescription = "Coin",
                         tint = Color(0xFFFFC107),
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(Dimens.spacing20)
                     )
                     Text(
                         text = "326K",

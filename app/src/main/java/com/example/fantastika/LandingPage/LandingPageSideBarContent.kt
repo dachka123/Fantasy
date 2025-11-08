@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.R
 
 @Composable
@@ -41,7 +42,7 @@ fun LandingPageSideBarContent(
         modifier = modifier
             .fillMaxSize()
             .background(Color(0xFFC68642))
-            .padding(20.dp)
+            .padding(Dimens.spacing20)
             .verticalScroll(rememberScrollState())
     ) {
         Box(
@@ -55,22 +56,22 @@ fun LandingPageSideBarContent(
             )
         }
 
-        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+        HorizontalDivider(modifier = Modifier.padding(vertical = Dimens.spacing8))
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = onHomeClick)
-                .padding(vertical = 8.dp),
+                .padding(vertical = Dimens.spacing8),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Default.Home,
                 contentDescription = "Home",
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(Dimens.spacing24),
                 tint = Color.White
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(Dimens.spacing16))
             Text(
                 text = "Home",
                 color = Color.White
@@ -81,16 +82,16 @@ fun LandingPageSideBarContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = onLeaderboardClick)
-                .padding(vertical = 8.dp),
+                .padding(vertical = Dimens.spacing8),
             verticalAlignment = Alignment.CenterVertically
         ){
             Icon(
                 imageVector = Icons.Default.Leaderboard,
                 contentDescription = "Leaderboard",
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(Dimens.spacing24),
                 tint = Color.White
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(Dimens.spacing16))
             Text(
                 text = "Leaderboard",
                 color = Color.White
@@ -101,16 +102,16 @@ fun LandingPageSideBarContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = onStatisticsClick)
-                .padding(vertical = 8.dp),
+                .padding(vertical = Dimens.spacing8),
             verticalAlignment = Alignment.CenterVertically
         ){
             Icon(
                 imageVector = Icons.Default.QueryStats,
                 contentDescription = "Statistics",
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(Dimens.spacing24),
                 tint = Color.White
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(Dimens.spacing24))
             Text(
                 text = "Statistics",
                 color = Color.White

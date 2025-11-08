@@ -17,8 +17,7 @@ data class FantastikaColorScheme(
     val onSecondary: Color,
     val tertiary: Color,
     val onTertiary: Color,
-    val orange: Color,
-    val sortButton: Color
+    val orange: Color
 )
 
 private val darkColorScheme = FantastikaColorScheme(
@@ -30,8 +29,7 @@ private val darkColorScheme = FantastikaColorScheme(
     onSecondary = Color(0xFFE5E5E7),
     tertiary =  Color(0xFF4A4A4C), // Mid-gray
     onTertiary =  Color(0xFF8C1515),
-    orange = Color(0xFFFFB74D),
-    sortButton = Color.White
+    orange = Color(0xFFFFB74D)
 )
 
 private val lightColorScheme = FantastikaColorScheme(
@@ -43,8 +41,7 @@ private val lightColorScheme = FantastikaColorScheme(
     onSecondary = Color(0xFF1C1B1F),
     tertiary = Color(0xFFC9C6C6),// Very light gray
     onTertiary = Color(0xFFFF8A80),
-    orange = Color(0xFFFF9800),
-    sortButton = Color(0xFF7D7D80)
+    orange = Color(0xFFFF9800)
 )
 val LocalFantastikaColorScheme = staticCompositionLocalOf { lightColorScheme }
 

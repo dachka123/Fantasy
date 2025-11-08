@@ -34,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.R
 import com.example.fantastika.ui.theme.FantastikaTheme
 
@@ -45,20 +46,20 @@ fun FixtureBoxes(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(top = 130.dp)
+            .padding(top = Dimens.spacing130)
             .verticalScroll(rememberScrollState())
     ) {
         Box(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp)
-                .height(300.dp)
+                .padding(horizontal = Dimens.spacing20)
+                .height(Dimens.spacing300)
                 .background(
                     FantastikaTheme.color.primary,
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(Dimens.spacing12)
                 )
                 .clickable(onClick = onClick)
-                .padding(32.dp)
+                .padding(Dimens.spacing32)
         ) {
             Row(
                 modifier = Modifier.fillMaxSize(),
@@ -69,7 +70,7 @@ fun FixtureBoxes(
                     verticalArrangement = Arrangement.Center,
                     modifier = Modifier
                         .weight(1f)
-                        .padding(end = 16.dp)
+                        .padding(end = Dimens.spacing16)
                 ) {
                     Text(
                         text = "KICK OFF",
@@ -79,11 +80,11 @@ fun FixtureBoxes(
                         )
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(Dimens.spacing8))
 
                     Text(
                         modifier = Modifier
-                            .padding(end = 10.dp),
+                            .padding(end = Dimens.spacing10),
                         text = "Play a quick match against any team!",
                         style = MaterialTheme.typography.bodyLarge.copy(
                             color = FantastikaTheme.color.background.copy(alpha = 0.8f)
@@ -94,12 +95,12 @@ fun FixtureBoxes(
                 }
 
                 Card(
-                    shape = RoundedCornerShape(20.dp),
+                    shape = RoundedCornerShape(Dimens.spacing20),
                     colors = CardDefaults.cardColors(
                         containerColor = Color.White.copy(alpha = 0.15f)
                     ),
                     modifier = Modifier
-                        .size(width = 120.dp, height = 160.dp)
+                        .size(width = Dimens.spacing120, height = Dimens.spacing160)
                 ) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
@@ -109,25 +110,25 @@ fun FixtureBoxes(
                             imageVector = Icons.Default.Person,
                             contentDescription = "Player Icon",
                             tint = FantastikaTheme.color.background,
-                            modifier = Modifier.size(60.dp)
+                            modifier = Modifier.size(Dimens.spacing60)
                         )
                     }
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(Dimens.spacing16))
 
         Box(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp)
-                .height(300.dp)
+                .padding(horizontal = Dimens.spacing20)
+                .height(Dimens.spacing300)
                 .background(
                     FantastikaTheme.color.onTertiary,
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(Dimens.spacing12)
                 )
-                .padding(32.dp)
+                .padding(Dimens.spacing32)
         ) {
             Box(
                 modifier = modifier
@@ -155,8 +156,8 @@ fun FixtureBoxes(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Card(
-                        shape = RoundedCornerShape(100.dp),
-                        modifier = Modifier.size(80.dp)
+                        shape = RoundedCornerShape(Dimens.spacing100),
+                        modifier = Modifier.size(Dimens.spacing80)
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.imagelogo),
@@ -164,10 +165,10 @@ fun FixtureBoxes(
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .clip(RoundedCornerShape(topStart = 24.dp, bottomStart = 24.dp))
+                                .clip(RoundedCornerShape(topStart = Dimens.spacing24, bottomStart = Dimens.spacing24))
                         )
                     }
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(Dimens.spacing8))
                     Text(
                         text = "Thunder Hawks",
                         color = FantastikaTheme.color.background,
@@ -184,7 +185,7 @@ fun FixtureBoxes(
                         color = FantastikaTheme.color.background,
                         style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Black)
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(Dimens.spacing5))
                     Text(
                         text = "NEXT MATCH",
                         color = FantastikaTheme.color.background.copy(alpha = 0.7f),
@@ -197,8 +198,8 @@ fun FixtureBoxes(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Card(
-                        shape = RoundedCornerShape(100.dp),
-                        modifier = Modifier.size(80.dp)
+                        shape = RoundedCornerShape(Dimens.spacing100),
+                        modifier = Modifier.size(Dimens.spacing80)
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.imagelogo),
@@ -206,10 +207,10 @@ fun FixtureBoxes(
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .clip(RoundedCornerShape(topStart = 24.dp, bottomStart = 24.dp))
+                                .clip(RoundedCornerShape(topStart = Dimens.spacing24, bottomStart = Dimens.spacing24))
                         )
                     }
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(Dimens.spacing8))
                     Text(
                         text = "Thunder Hawks",
                         color = FantastikaTheme.color.background,

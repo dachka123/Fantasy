@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.PlayerSelection.Common.DrawerDragHandle
 import com.example.fantastika.PlayerSelection.Common.IphoneDrawer
 import com.example.fantastika.R
@@ -59,13 +60,13 @@ fun PlayerDetailsBottomDialog(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp)
+                    .padding(Dimens.spacing20)
             ) {
                 DrawerDragHandle(
-                    modifier = Modifier.padding(vertical = 8.dp)
+                    modifier = Modifier.padding(vertical = Dimens.spacing8)
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(Dimens.spacing8))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -75,16 +76,16 @@ fun PlayerDetailsBottomDialog(
                         painter = painterResource(id = R.drawable.imagelogo),
                         contentDescription = "Player Image",
                         modifier = Modifier
-                            .size(100.dp)
+                            .size(Dimens.spacing100)
                             .clip(CircleShape),
                         contentScale = ContentScale.Crop
                     )
 
-                    Spacer(modifier = Modifier.width(16.dp))
+                    Spacer(modifier = Modifier.width(Dimens.spacing16))
 
                     Column(
                         modifier = Modifier
-                            .padding(top = 10.dp, end = 45.dp)
+                            .padding(top = Dimens.spacing10, end = Dimens.spacing45)
                             .weight(1f)
                     ) {
                         Text(
@@ -104,7 +105,7 @@ fun PlayerDetailsBottomDialog(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Dimens.spacing12))
 
                 Text(
                     text = "Price: $$playerPrice",
@@ -118,10 +119,10 @@ fun PlayerDetailsBottomDialog(
                 onClick = onDismiss,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(25.dp)
-                    .size(20.dp)
+                    .padding(Dimens.spacing24)
+                    .size(Dimens.spacing20)
                     .background(Color.Gray, CircleShape)
-                    .size(20.dp)
+                    .size(Dimens.spacing20)
             ) {
                 Icon(
                     imageVector = Icons.Default.Close,

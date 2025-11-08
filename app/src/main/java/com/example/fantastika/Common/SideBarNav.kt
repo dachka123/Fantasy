@@ -37,7 +37,7 @@ fun SideBarNav(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet(Modifier.width(350.dp)) {
+            ModalDrawerSheet(Modifier.width(Dimens.spacing350)) {
                 drawerContent(closeDrawer)
             }
         }
@@ -57,7 +57,7 @@ fun SideBarNav(
                                         contentDescription = "Back"
                                     )
                                 }
-                                Spacer(modifier = Modifier.width(8.dp))
+                                Spacer(modifier = Modifier.width(Dimens.spacing8))
                             }
 
                             //Text(title)
@@ -72,10 +72,10 @@ fun SideBarNav(
                     actions = {
                         ThemeSwitcher(
                             darkTheme = darkTheme,
-                            size = 30.dp,
+                            size = Dimens.spacing30,
                             onClick = onThemeUpdated
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(Dimens.spacing8))
                     }
                 )
             }

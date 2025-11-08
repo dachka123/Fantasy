@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.PlayerSelection.Common.FilterContent
 import com.example.fantastika.PlayerSelection.Common.FilterMode
 import com.example.fantastika.PlayerSelection.Common.FilterSection
@@ -30,7 +31,7 @@ fun SidebarContent(
     Column(
         modifier = Modifier
             .background(Color.White)
-            .padding(16.dp)
+            .padding(Dimens.spacing16)
             .fillMaxHeight()
     ) {
         Text(
@@ -39,7 +40,7 @@ fun SidebarContent(
             color = Color.Black
         )
 
-        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp),color = Color.Black)
+        HorizontalDivider(modifier = Modifier.padding(vertical = Dimens.spacing8),color = Color.Black)
 
         FilterSection(
             filterMode = filterMode,
@@ -78,7 +79,7 @@ fun SidebarContent(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(Dimens.spacing16)
             ) {
                 SortSection(
                     filterMode = filterMode,

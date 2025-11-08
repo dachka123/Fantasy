@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarItem.SidebarItem
 import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarItem.TeamItem
 import com.example.fantastika.PlayerSelection.Data.Player
@@ -28,7 +29,7 @@ fun FilterContent(
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(Dimens.spacing8)
     ) {
         when (filterMode) {
             FilterMode.PLAYERS -> {

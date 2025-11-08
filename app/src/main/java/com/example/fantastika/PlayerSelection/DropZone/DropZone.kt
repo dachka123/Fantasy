@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.PlayerSelection.DropZone.PlayerDetails.PlayerDetailsBottomDialog
 import com.example.fantastika.PlayerSelection.Data.allPlayers
 import com.example.fantastika.ui.theme.FantastikaTheme
@@ -43,41 +44,26 @@ fun DropZone(
 
     Box(
         modifier = Modifier
-            .width(100.dp)
-            .height(150.dp)
+            .width(Dimens.spacing100)
+            .height(Dimens.spacing150)
             .drawBehind {
                 for (i in 1..2) {
                     drawRoundRect(
                         color = onBackground.copy(alpha = 0.3f / i),
-                        cornerRadius = CornerRadius(12.dp.toPx()),
+                        cornerRadius = CornerRadius(Dimens.spacing12.toPx()),
                         style = Stroke(width = (8.dp * i).toPx())
                     )
                 }
             }
             .background(
                 color = FantastikaTheme.color.background,
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(Dimens.spacing12)
             )
             .border(
                 width = 2.dp,
                 color = FantastikaTheme.color.onBackground,
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(Dimens.spacing12)
             )
-            /*.shadow(
-                elevation = 16.dp,
-                shape = RoundedCornerShape(12.dp),
-                spotColor = Color.Green,
-                ambientColor = Color.Red
-            )
-            .background(
-                color = Color.White,
-                shape = RoundedCornerShape(12.dp)
-            )
-            .border(
-                width = 3.dp,
-                color = Color.Gray.copy(alpha = 0.3f),
-                shape = RoundedCornerShape(12.dp)
-            )*/
             .dragAndDropTarget(
                 shouldStartDragAndDrop = { event ->
                     event.mimeTypes().contains(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -115,8 +101,8 @@ fun DropZone(
                     tint = MaterialTheme.colorScheme.error,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(4.dp)
-                        .size(24.dp)
+                        .padding(Dimens.spacing5)
+                        .size(Dimens.spacing24)
                         .clickable { onItemRemoved(droppedItem) }
                 )
             }

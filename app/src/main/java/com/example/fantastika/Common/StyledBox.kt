@@ -21,9 +21,9 @@ fun StyledBox(
 ) {
     Box(
         modifier = modifier
-            .border(1.dp, borderColor, RoundedCornerShape(24.dp))
-            .background(backgroundColor, RoundedCornerShape(24.dp))
-            .padding(horizontal = 14.dp, vertical = 8.dp),
+            .border(Dimens.spacing1, borderColor, RoundedCornerShape(Dimens.spacing24))
+            .background(backgroundColor, RoundedCornerShape(Dimens.spacing24))
+            .padding(horizontal = Dimens.spacing14, vertical = Dimens.spacing8),
         contentAlignment = Alignment.Center
     ) {
         content()

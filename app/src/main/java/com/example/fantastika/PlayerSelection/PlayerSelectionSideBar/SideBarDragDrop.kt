@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.PlayerSelection.DropZone.DropZone
 import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarViewModel
 import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SidebarContent
@@ -93,8 +94,8 @@ fun SideBarDragDrop(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(490.dp)
-                            .padding(horizontal = 16.dp),
+                            .height(Dimens.spacing490)
+                            .padding(horizontal = Dimens.spacing16),
                         contentAlignment = Alignment.Center
                     ) {
                         Image(
@@ -111,10 +112,10 @@ fun SideBarDragDrop(
 
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(64.dp),
+                            verticalArrangement = Arrangement.spacedBy(Dimens.spacing64),
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(top = 100.dp)
+                                .padding(top = Dimens.spacing100)
                         ) {
                             DropZone(
                                 droppedItem = droppedZones[0],
@@ -147,18 +148,18 @@ fun SideBarDragDrop(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 40.dp)
+                            .padding(top = Dimens.spacing40)
                             .horizontalScroll(rememberScrollState()),
                     ) {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(horizontal = 16.dp)
+                                .padding(horizontal = Dimens.spacing16)
                         ) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxSize(),
-                                horizontalArrangement = Arrangement.spacedBy(15.dp)
+                                horizontalArrangement = Arrangement.spacedBy(Dimens.spacing16)
                             ) {
                                 DropZone(
                                     droppedItem = droppedZones[0],
@@ -183,12 +184,12 @@ fun SideBarDragDrop(
                                 Box(
                                     modifier = Modifier
                                         .fillMaxSize()
-                                        .padding(start = 45.dp),
+                                        .padding(start = Dimens.spacing45),
                                 ) {
                                     Row(
                                         modifier = Modifier
                                             .fillMaxSize(),
-                                        horizontalArrangement = Arrangement.spacedBy(15.dp)
+                                        horizontalArrangement = Arrangement.spacedBy(Dimens.spacing16)
                                     ) {
                                         DropZone(
                                             droppedItem = droppedZones[3],

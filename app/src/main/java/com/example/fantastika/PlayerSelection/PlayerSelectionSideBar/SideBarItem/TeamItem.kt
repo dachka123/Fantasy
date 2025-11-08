@@ -18,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.example.fantastika.Common.Dimens
 import com.example.fantastika.R
 
 @Composable
@@ -28,24 +29,24 @@ fun TeamItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 6.dp)
+            .padding(horizontal = Dimens.spacing16, vertical = Dimens.spacing8)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(24.dp))
                 .background(Color.White)
-                .border(1.dp, Color.Black, RoundedCornerShape(24.dp))
-                .padding(vertical = 12.dp, horizontal = 12.dp)
+                .border(Dimens.spacing1, Color.Black, RoundedCornerShape(Dimens.spacing24))
+                .padding(vertical = Dimens.spacing12, horizontal = Dimens.spacing12)
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
-                    .size(56.dp)
+                    .size(Dimens.spacing56)
                     .clip(CircleShape)
                     .background(Color.Black)
-                    .padding(2.dp)
+                    .padding(Dimens.spacing2)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.imagelogo),
