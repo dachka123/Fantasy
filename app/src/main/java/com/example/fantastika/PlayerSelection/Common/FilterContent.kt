@@ -6,10 +6,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.ui.unit.dp
 import com.example.fantastika.Common.Dimens
-import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarItem.SidebarItem
-import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarItem.TeamItem
+import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.Components.SideBarItem.SidebarItem
+import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.Components.SideBarItem.TeamItem
 import com.example.fantastika.PlayerSelection.Data.Player
 import com.example.fantastika.PlayerSelection.Data.allTeams
 

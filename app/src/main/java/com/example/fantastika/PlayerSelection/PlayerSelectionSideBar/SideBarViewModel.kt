@@ -1,36 +1,71 @@
 package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.fantastika.PlayerSelection.Data.allPlayers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.map
 
-class SideBarViewModel: ViewModel() {
+class SideBarViewModel : ViewModel() {
+    companion object {
+        private const val INITIAL_BUDGET = 5000
+    }
 
     private val _droppedZones = MutableStateFlow(
         listOf<String?>(null, null, null, null, null)
     )
-    val droppedZones = _droppedZones.asStateFlow()
+    val droppedZones: StateFlow<List<String?>> = _droppedZones.asStateFlow()
 
-    private val _usedItems = MutableStateFlow<List<String>>(emptyList())
-    val usedItems = _usedItems.asStateFlow()
+    val usedItems: StateFlow<List<String>> = droppedZones.map { zones ->
+        zones.filterNotNull().distinct()
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    fun onItemDropped(zoneIndex: Int, newItem: String) {
-        val oldItem = _droppedZones.value[zoneIndex]
-        val updatedZones = _droppedZones.value.toMutableList()
-        updatedZones[zoneIndex] = newItem
-        _droppedZones.value = updatedZones
+    private val _remainingBudget = MutableStateFlow(INITIAL_BUDGET)
+    val remainingBudget: StateFlow<Int> = _remainingBudget.asStateFlow()
 
-        oldItem?.let {
-            _usedItems.value = _usedItems.value - it
-        }
-        _usedItems.value = _usedItems.value + newItem
+    private fun getPlayerPrice(playerName: String): Int {
+        return allPlayers.firstOrNull { it.name == playerName }?.price ?: 0
     }
 
-    fun onItemRemoved(zoneIndex: Int, removedItem: String) {
-        val updatedZones = _droppedZones.value.toMutableList()
-        updatedZones[zoneIndex] = null
-        _droppedZones.value = updatedZones
+    fun onItemDropped(zoneIndex: Int, newItemName: String): Boolean {
+        val newItemPrice = getPlayerPrice(newItemName)
+        val oldItemName = _droppedZones.value[zoneIndex]
 
-        _usedItems.value = _usedItems.value - removedItem
+        if (oldItemName == null && _droppedZones.value.contains(newItemName)) {
+            return false
+        }
+
+        var oldItemPrice = 0
+        if (oldItemName != null) {
+            oldItemPrice = getPlayerPrice(oldItemName)
+        }
+
+        val priceDifference = newItemPrice - oldItemPrice
+
+        if (priceDifference > _remainingBudget.value) {
+            return false
+        }
+
+        _remainingBudget.update { it - priceDifference }
+
+        _droppedZones.update { currentList ->
+            currentList.toMutableList().apply { this[zoneIndex] = newItemName }
+        }
+        return true
+    }
+
+    fun onItemRemoved(zoneIndex: Int, removedItemName: String) {
+        val removedItemPrice = getPlayerPrice(removedItemName)
+
+        _remainingBudget.update { it + removedItemPrice }
+
+        _droppedZones.update { currentList ->
+            currentList.toMutableList().apply { this[zoneIndex] = null }
+        }
     }
 }

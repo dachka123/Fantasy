@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalFoundationApi::class)
 
-package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarItem
+package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.Components.SideBarItem
 
 import android.content.ClipData
 import android.content.ClipDescription
@@ -33,10 +33,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fantastika.Common.Dimens
 import com.example.fantastika.R
-import com.example.fantastika.ui.theme.FantastikaTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -93,7 +91,6 @@ fun SidebarItem(
                     .width(Dimens.spacing56)
                     .height(Dimens.spacing70)
                     .clip(RoundedCornerShape(topStart = Dimens.spacing24, bottomStart = Dimens.spacing24))
-                    //.background(FantastikaTheme.color.onBackground)
             )
             Spacer(modifier = Modifier.width(Dimens.spacing24))
             Row(

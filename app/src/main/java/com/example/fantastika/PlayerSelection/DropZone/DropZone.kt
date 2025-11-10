@@ -33,14 +33,20 @@ import com.example.fantastika.ui.theme.FantastikaTheme
 @Composable
 fun DropZone(
     droppedItem: String?,
-    onItemDropped: (String) -> Unit,
+    onItemDropped: (String) -> Boolean,
     onItemRemoved: (String) -> Unit,
     usedItems: List<String>,
+    remainingBudget: Int
 ) {
 
     val onBackground = FantastikaTheme.color.onBackground
     var showDialog by remember { mutableStateOf(false) }
     var showPlayerDetailsDialog by remember { mutableStateOf(false) }
+    var showBudgetError by remember { mutableStateOf(false) }
+
+    fun getPlayerPrice(playerName: String): Int {
+        return allPlayers.firstOrNull { it.name == playerName }?.price ?: 0
+    }
 
     Box(
         modifier = Modifier
@@ -71,10 +77,17 @@ fun DropZone(
                 target = remember {
                     object : DragAndDropTarget {
                         override fun onDrop(event: DragAndDropEvent): Boolean {
-                            val label = event.toAndroidDragEvent()
+                            val playerName = event.toAndroidDragEvent()
                                 .clipData?.getItemAt(0)?.text?.toString()
-                            label?.let { onItemDropped(it) }
-                            return true
+
+                            playerName?.let {
+                                val success = onItemDropped(it)
+                                if (!success && getPlayerPrice(it) > remainingBudget) {
+                                    showBudgetError = true
+                                }
+                                return success
+                            }
+                            return false
                         }
                     }
                 }
@@ -106,7 +119,8 @@ fun DropZone(
                         .clickable { onItemRemoved(droppedItem) }
                 )
             }
-        } else {
+        }
+        else {
             Text(
                 text = "+",
                 fontSize = 23.sp,
@@ -122,9 +136,43 @@ fun DropZone(
             usedItems = usedItems,
             onDismiss = { showDialog = false },
             onPlayerSelected = { player ->
-                onItemDropped(player.name)
+                val success = onItemDropped(player.name)
+
+                // Check if the selection failed specifically due to budget constraint
+                if (!success && player.price > remainingBudget) {
+                    showBudgetError = true
+                }
                 showDialog = false
             }
+        )
+    }
+    if (showBudgetError) {
+        AlertDialog(
+            onDismissRequest = {
+                showBudgetError = false
+            },
+            title = {
+                Text(
+                    "Budget Exceeded!",
+                    color = MaterialTheme.colorScheme.error
+                )
+            },
+            text = {
+                Text(
+                    "Your current remaining budget is $${remainingBudget}. " +
+                            "Please select a cheaper player or remove an existing player from your lineup to free up funds.",
+                    fontWeight = FontWeight.Normal
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showBudgetError = false
+                    }
+                ) {
+                    Text("OK")
+                }
+            },
         )
     }
     if (showPlayerDetailsDialog && droppedItem != null) {

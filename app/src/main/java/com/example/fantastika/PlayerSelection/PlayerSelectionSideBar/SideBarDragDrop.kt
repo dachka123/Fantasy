@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.fantastika.Common.Dimens
 import com.example.fantastika.PlayerSelection.DropZone.DropZone
@@ -26,7 +25,7 @@ import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarView
 import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SidebarContent
 import com.example.fantastika.PlayerSelection.Data.allPlayers
 import com.example.fantastika.Common.SideBarNav
-import com.example.fantastika.LandingPage.Components.TopBarContent
+import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.Components.PlayerSelectionTopBarContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,6 +37,7 @@ fun SideBarDragDrop(
 ) {
     val droppedZones by viewModel.droppedZones.collectAsState()
     val usedItems by viewModel.usedItems.collectAsState()
+    val remainingBudget by viewModel.remainingBudget.collectAsState()
     var rotationAngle by remember { mutableStateOf(0f) }
 
     BackHandler {
@@ -56,7 +56,7 @@ fun SideBarDragDrop(
 
     SideBarNav(
         //title = "Fantastika",
-        topBarContent = { TopBarContent() },
+        topBarContent = { PlayerSelectionTopBarContent(remainingBudget = remainingBudget) },
         darkTheme = darkTheme,
         onThemeUpdated = onThemeUpdated,
         onBackPressed = onBackPressed,
@@ -121,7 +121,8 @@ fun SideBarDragDrop(
                                 droppedItem = droppedZones[0],
                                 onItemDropped = { viewModel.onItemDropped(0, it) },
                                 onItemRemoved = { viewModel.onItemRemoved(0, it) },
-                                usedItems = usedItems
+                                usedItems = usedItems,
+                                remainingBudget = remainingBudget
                             )
 
                             Row(
@@ -132,13 +133,15 @@ fun SideBarDragDrop(
                                     droppedItem = droppedZones[1],
                                     onItemDropped = { viewModel.onItemDropped(1, it) },
                                     onItemRemoved = { viewModel.onItemRemoved(1, it) },
-                                    usedItems = usedItems
+                                    usedItems = usedItems,
+                                    remainingBudget = remainingBudget
                                 )
                                 DropZone(
                                     droppedItem = droppedZones[2],
                                     onItemDropped = { viewModel.onItemDropped(2, it) },
                                     onItemRemoved = { viewModel.onItemRemoved(2, it) },
-                                    usedItems = usedItems
+                                    usedItems = usedItems,
+                                    remainingBudget = remainingBudget
                                 )
                             }
                         }
@@ -165,19 +168,22 @@ fun SideBarDragDrop(
                                     droppedItem = droppedZones[0],
                                     onItemDropped = { viewModel.onItemDropped(0, it) },
                                     onItemRemoved = { viewModel.onItemRemoved(0, it) },
-                                    usedItems = usedItems
+                                    usedItems = usedItems,
+                                    remainingBudget = remainingBudget
                                 )
                                 DropZone(
                                     droppedItem = droppedZones[1],
                                     onItemDropped = { viewModel.onItemDropped(1, it) },
                                     onItemRemoved = { viewModel.onItemRemoved(1, it) },
-                                    usedItems = usedItems
+                                    usedItems = usedItems,
+                                    remainingBudget = remainingBudget
                                 )
                                 DropZone(
                                     droppedItem = droppedZones[2],
                                     onItemDropped = { viewModel.onItemDropped(2, it) },
                                     onItemRemoved = { viewModel.onItemRemoved(2, it) },
-                                    usedItems = usedItems
+                                    usedItems = usedItems,
+                                    remainingBudget = remainingBudget
                                 )
 
                                 //bench
@@ -195,13 +201,15 @@ fun SideBarDragDrop(
                                             droppedItem = droppedZones[3],
                                             onItemDropped = { viewModel.onItemDropped(3, it) },
                                             onItemRemoved = { viewModel.onItemRemoved(3, it) },
-                                            usedItems = usedItems
+                                            usedItems = usedItems,
+                                            remainingBudget = remainingBudget
                                         )
                                         DropZone(
                                             droppedItem = droppedZones[4],
                                             onItemDropped = { viewModel.onItemDropped(4, it) },
                                             onItemRemoved = { viewModel.onItemRemoved(4, it) },
-                                            usedItems = usedItems
+                                            usedItems = usedItems,
+                                            remainingBudget = remainingBudget
                                         )
                                     }
                                 }

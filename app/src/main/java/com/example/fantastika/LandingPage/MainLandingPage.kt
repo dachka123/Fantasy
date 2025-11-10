@@ -3,7 +3,7 @@ package com.example.fantastika.LandingPage
 import androidx.compose.runtime.Composable
 import com.example.fantastika.LandingPage.Components.FixtureBoxes
 import com.example.fantastika.Common.SideBarNav
-import com.example.fantastika.LandingPage.Components.TopBarContent
+import com.example.fantastika.LandingPage.Components.LandingPageTopBarContent
 
 @Composable
 fun MainLandingPage(
@@ -15,7 +15,7 @@ fun MainLandingPage(
 
     SideBarNav(
         //title = "Landing",
-        topBarContent = { TopBarContent() },
+        topBarContent = { LandingPageTopBarContent() },
         darkTheme = darkTheme,
         onThemeUpdated = onThemeUpdated,
 
