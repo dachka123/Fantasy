@@ -20,6 +20,7 @@ import androidx.compose.ui.draganddrop.mimeTypes
 import androidx.compose.ui.draganddrop.toAndroidDragEvent
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,7 +28,6 @@ import androidx.compose.ui.unit.sp
 import com.example.fantastika.Common.Dimens
 import com.example.fantastika.PlayerSelection.DropZone.PlayerDetails.PlayerDetailsBottomDialog
 import com.example.fantastika.PlayerSelection.Data.allPlayers
-import com.example.fantastika.ui.theme.FantastikaTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -39,7 +39,7 @@ fun DropZone(
     remainingBudget: Int
 ) {
 
-    val onBackground = FantastikaTheme.color.onBackground
+    val onBackground = Color.White
     var showDialog by remember { mutableStateOf(false) }
     var showPlayerDetailsDialog by remember { mutableStateOf(false) }
     var showBudgetError by remember { mutableStateOf(false) }
@@ -62,12 +62,12 @@ fun DropZone(
                 }
             }
             .background(
-                color = FantastikaTheme.color.background,
+                color = Color.Black,
                 shape = RoundedCornerShape(Dimens.spacing12)
             )
             .border(
                 width = 2.dp,
-                color = FantastikaTheme.color.onBackground,
+                color = Color.Black,
                 shape = RoundedCornerShape(Dimens.spacing12)
             )
             .dragAndDropTarget(
@@ -111,7 +111,7 @@ fun DropZone(
                 Icon(
                     imageVector = Icons.Filled.Close,
                     contentDescription = "Remove item",
-                    tint = MaterialTheme.colorScheme.error,
+                    tint = Color.Red,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(Dimens.spacing5)
@@ -125,7 +125,7 @@ fun DropZone(
                 text = "+",
                 fontSize = 23.sp,
                 fontWeight = FontWeight.Bold,
-                color = FantastikaTheme.color.onBackground,
+                color = Color.White,
                 modifier = Modifier.align(Alignment.Center)
             )
         }
@@ -148,20 +148,23 @@ fun DropZone(
     }
     if (showBudgetError) {
         AlertDialog(
+            modifier = Modifier
+                .background(Color.Black),
             onDismissRequest = {
                 showBudgetError = false
             },
             title = {
                 Text(
                     "Budget Exceeded!",
-                    color = MaterialTheme.colorScheme.error
+                    color = Color.Red
                 )
             },
             text = {
                 Text(
                     "Your current remaining budget is $${remainingBudget}. " +
                             "Please select a cheaper player or remove an existing player from your lineup to free up funds.",
-                    fontWeight = FontWeight.Normal
+                    fontWeight = FontWeight.Normal,
+                    color = Color.White
                 )
             },
             confirmButton = {
@@ -170,7 +173,10 @@ fun DropZone(
                         showBudgetError = false
                     }
                 ) {
-                    Text("OK")
+                    Text(
+                        "OK",
+                        color = Color.White
+                    )
                 }
             },
         )

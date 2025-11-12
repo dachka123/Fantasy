@@ -57,8 +57,6 @@ fun SideBarDragDrop(
     SideBarNav(
         //title = "Fantastika",
         topBarContent = { PlayerSelectionTopBarContent(remainingBudget = remainingBudget) },
-        darkTheme = darkTheme,
-        onThemeUpdated = onThemeUpdated,
         onBackPressed = onBackPressed,
 
         drawerContent = { closeDrawer ->

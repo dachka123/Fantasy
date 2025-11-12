@@ -1,6 +1,5 @@
 package com.example.fantastika.Common
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,24 +12,23 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.ThemeSwitcher
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SideBarNav(
     //title: String,
-    darkTheme: Boolean,
-    onThemeUpdated: () -> Unit,
+    /*darkTheme: Boolean,
+    onThemeUpdated: () -> Unit,*/
     onBackPressed: (() -> Unit)? = null,
     drawerContent: @Composable (closeDrawer: () -> Unit) -> Unit,
     screenContent: @Composable (PaddingValues) -> Unit,
     topBarContent: @Composable () -> Unit,
+    themeSwitcherContent: @Composable () -> Unit = {}
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    val scrollState = rememberScrollState()
+    //val scrollState = rememberScrollState()
 
     val closeDrawer: () -> Unit = { scope.launch { drawerState.close() } }
 
@@ -48,7 +46,7 @@ fun SideBarNav(
                     title = {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.horizontalScroll(scrollState)
+                            //modifier = Modifier.horizontalScroll(scrollState)
                         ) {
                             if (onBackPressed != null) {
                                 IconButton(onClick = onBackPressed) {
@@ -70,11 +68,7 @@ fun SideBarNav(
                         }
                     },
                     actions = {
-                        ThemeSwitcher(
-                            darkTheme = darkTheme,
-                            size = Dimens.spacing30,
-                            onClick = onThemeUpdated
-                        )
+                        themeSwitcherContent()
                         Spacer(modifier = Modifier.width(Dimens.spacing8))
                     }
                 )

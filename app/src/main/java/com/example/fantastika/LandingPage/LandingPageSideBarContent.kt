@@ -27,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.fantastika.Common.Dimens
 import com.example.fantastika.R
 
@@ -36,84 +35,101 @@ fun LandingPageSideBarContent(
     modifier: Modifier = Modifier,
     onHomeClick: () -> Unit = {},
     onLeaderboardClick: () -> Unit = {},
-    onStatisticsClick: () -> Unit = {}
+    onStatisticsClick: () -> Unit = {},
+    onLogoutClick: () -> Unit = {}
 ) {
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
             .background(Color(0xFFC68642))
             .padding(Dimens.spacing20)
-            .verticalScroll(rememberScrollState())
     ) {
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center,
-        ){
-            Image(
-                painter = painterResource(id = R.drawable.sidebarlogo),
-                contentDescription = "Logo",
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.sidebarlogo),
+                    contentDescription = "Logo",
+                )
+            }
+
+            HorizontalDivider(modifier = Modifier.padding(vertical = Dimens.spacing8))
+
+            Row(
                 modifier = Modifier
-            )
+                    .fillMaxWidth()
+                    .clickable(onClick = onHomeClick)
+                    .padding(vertical = Dimens.spacing8),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Home",
+                    modifier = Modifier.size(Dimens.spacing24),
+                    tint = Color.White
+                )
+                Spacer(modifier = Modifier.width(Dimens.spacing16))
+                Text(
+                    text = "Home",
+                    color = Color.White
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = onLeaderboardClick)
+                    .padding(vertical = Dimens.spacing8),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Leaderboard,
+                    contentDescription = "Leaderboard",
+                    modifier = Modifier.size(Dimens.spacing24),
+                    tint = Color.White
+                )
+                Spacer(modifier = Modifier.width(Dimens.spacing16))
+                Text(
+                    text = "Leaderboard",
+                    color = Color.White
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = onStatisticsClick)
+                    .padding(vertical = Dimens.spacing8),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.QueryStats,
+                    contentDescription = "Statistics",
+                    modifier = Modifier.size(Dimens.spacing24),
+                    tint = Color.White
+                )
+                Spacer(modifier = Modifier.width(Dimens.spacing16))
+                Text(
+                    text = "Statistics",
+                    color = Color.White
+                )
+            }
         }
-
-        HorizontalDivider(modifier = Modifier.padding(vertical = Dimens.spacing8))
-
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .clickable(onClick = onHomeClick)
+                .align(Alignment.BottomStart)
+                .clickable(onClick = onLogoutClick)
                 .padding(vertical = Dimens.spacing8),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = Icons.Default.Home,
-                contentDescription = "Home",
-                modifier = Modifier.size(Dimens.spacing24),
-                tint = Color.White
-            )
-            Spacer(modifier = Modifier.width(Dimens.spacing16))
             Text(
-                text = "Home",
-                color = Color.White
-            )
-        }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable(onClick = onLeaderboardClick)
-                .padding(vertical = Dimens.spacing8),
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Icon(
-                imageVector = Icons.Default.Leaderboard,
-                contentDescription = "Leaderboard",
-                modifier = Modifier.size(Dimens.spacing24),
-                tint = Color.White
-            )
-            Spacer(modifier = Modifier.width(Dimens.spacing16))
-            Text(
-                text = "Leaderboard",
-                color = Color.White
-            )
-        }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable(onClick = onStatisticsClick)
-                .padding(vertical = Dimens.spacing8),
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Icon(
-                imageVector = Icons.Default.QueryStats,
-                contentDescription = "Statistics",
-                modifier = Modifier.size(Dimens.spacing24),
-                tint = Color.White
-            )
-            Spacer(modifier = Modifier.width(Dimens.spacing24))
-            Text(
-                text = "Statistics",
+                text = "Log out",
                 color = Color.White
             )
         }

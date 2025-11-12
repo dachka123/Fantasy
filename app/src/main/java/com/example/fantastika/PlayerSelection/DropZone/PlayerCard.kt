@@ -24,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
 import com.example.fantastika.Common.Dimens
 import com.example.fantastika.R
-import com.example.fantastika.ui.theme.FantastikaTheme
 
 @Composable
 fun PlayerCard(
@@ -34,7 +33,7 @@ fun PlayerCard(
 ) {
     Card(
         shape = RoundedCornerShape(Dimens.spacing16),
-        colors = CardDefaults.cardColors(containerColor = FantastikaTheme.color.secondary)
+        colors = CardDefaults.cardColors(containerColor = Color.Black)
     ) {
         Box(Modifier.fillMaxSize()) {
             Image(
@@ -70,7 +69,7 @@ fun PlayerCard(
                                 initialDelayMillis = 0,
                                 velocity = 50.dp
                             ),
-                        color = FantastikaTheme.color.onSecondary
+                        color = Color.White
                     )
                 }
             }
@@ -81,13 +80,13 @@ fun PlayerCard(
                     .padding(bottom = Dimens.spacing10)
                     .height(Dimens.spacing28)
                     .clip(TrapeziumShape(cutAmount = 40f))
-                    .background(FantastikaTheme.color.background)
+                    .background(Color.White)
                     .padding(horizontal = Dimens.spacing10),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "$$price",
-                    color = FantastikaTheme.color.onBackground,
+                    color = Color.Black,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -98,12 +97,12 @@ fun PlayerCard(
                     .align(Alignment.BottomEnd)
                     .size(Dimens.spacing35)
                     .clip(RoundedCornerShape(topStart = Dimens.spacing8))
-                    .background(FantastikaTheme.color.secondary),
+                    .background(Color.Black),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = rating.toString(),
-                    color = FantastikaTheme.color.onSecondary,
+                    color = Color.White,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold
                 )
