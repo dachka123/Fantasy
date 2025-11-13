@@ -6,6 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.fantastika.LandingPage.MainLandingPage
+import com.example.fantastika.LoginRegister.Login.LoginPageContent
+import com.example.fantastika.LoginRegister.Register.RegisterPageContent
 import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarViewModel
 import com.example.fantastika.SideBarDragDrop
 
@@ -32,6 +34,9 @@ fun AppNavHost(
                 },
                 onNavigateToFixtures = {
                     navController.navigate(NavRoutes.MainApp.route)
+                },
+                onNavigateToLogin = {
+                    navController.navigate(NavRoutes.Login.route)
                 }
             )
         }
@@ -45,6 +50,18 @@ fun AppNavHost(
                     navController.popBackStack()
                 }
             )
+        }
+
+        composable(NavRoutes.Login.route) {
+            LoginPageContent(
+                onNavigateToRegister = {
+                    navController.navigate(NavRoutes.Register.route)
+                }
+            )
+        }
+
+        composable(NavRoutes.Register.route) {
+            RegisterPageContent()
         }
     }
 }

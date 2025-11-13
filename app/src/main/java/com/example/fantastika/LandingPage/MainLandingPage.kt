@@ -1,8 +1,6 @@
 package com.example.fantastika.LandingPage
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import com.example.fantastika.Common.Dimens
 import com.example.fantastika.LandingPage.Components.FixtureBoxes
 import com.example.fantastika.Common.SideBarNav
@@ -14,12 +12,15 @@ fun MainLandingPage(
     onStartApp: () -> Unit,
     onNavigateToFixtures: () -> Unit,
     darkTheme: Boolean,
-    onThemeUpdated: () -> Unit
+    onThemeUpdated: () -> Unit,
+    onNavigateToLogin: () -> Unit,
 ) {
 
     SideBarNav(
         //title = "Landing",
-        topBarContent = { LandingPageTopBarContent(Modifier.fillMaxWidth()) },
+        topBarContent = { LandingPageTopBarContent(
+            onNavigateToLogin = onNavigateToLogin
+        ) },
 
         drawerContent = { closeDrawer ->
             LandingPageSideBarContent()

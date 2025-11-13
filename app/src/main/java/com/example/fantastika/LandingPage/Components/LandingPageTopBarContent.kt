@@ -2,6 +2,7 @@ package com.example.fantastika.LandingPage.Components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -13,13 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.fantastika.Common.Dimens
 import com.example.fantastika.ui.theme.FantastikaTheme
 
 @Composable
 fun LandingPageTopBarContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateToLogin: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -37,6 +38,7 @@ fun LandingPageTopBarContent(
                     color = FantastikaTheme.color.onBackground,
                     shape = RoundedCornerShape(Dimens.spacing24)
                 )
+                .clickable { onNavigateToLogin() }
                 .padding(horizontal = Dimens.spacing8, vertical = Dimens.spacing2),
             contentAlignment = Alignment.Center
         ) {
@@ -46,10 +48,4 @@ fun LandingPageTopBarContent(
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun TopBarContentPrev() {
-    LandingPageTopBarContent()
 }
