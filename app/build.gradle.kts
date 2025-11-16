@@ -2,14 +2,16 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    //id("com.apollographql.apollo3").version("3.8.6")
+    alias(libs.plugins.apollo)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hiltAndroid)
 }
 
-/*apollo {
+apollo {
     service("service") {
         packageName.set("com.example.fantastika")
     }
-}*/
+}
 
 
 android {
@@ -38,14 +40,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "2.0.0"
     }
 }
 
@@ -54,10 +59,16 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.androidx.compose.material.icons.extended.android)
+    implementation(libs.coil.compose)
 
     implementation(libs.androidx.compose.ui.text)
 
-    //implementation(libs.apollo.runtime)
+    implementation(libs.apollo.runtime)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.androidx.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

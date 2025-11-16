@@ -1,6 +1,5 @@
-package com.example.fantastika.PlayerSelection.DropZone
+package com.example.fantastika.PlayerSelection.Presentation.DropZone
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.MarqueeAnimationMode
 import androidx.compose.foundation.MarqueeSpacing
 import androidx.compose.foundation.background
@@ -18,17 +17,15 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import coil.compose.AsyncImage
 import com.example.fantastika.Common.Dimens
-import com.example.fantastika.R
+import com.example.fantastika.PlayerSelection.Domain.SimplePlayer
 
 @Composable
 fun PlayerCard(
-    playerName: String,
-    price: Int,
+    player: SimplePlayer,
     rating: Int = 2
 ) {
     Card(
@@ -36,14 +33,15 @@ fun PlayerCard(
         colors = CardDefaults.cardColors(containerColor = Color.Black)
     ) {
         Box(Modifier.fillMaxSize()) {
-            Image(
-                painter = painterResource(id = R.drawable.imagelogo),
-                contentDescription = null,
+            AsyncImage(
+                model = player.userPhoto,
+                contentDescription = "Player Image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(start = Dimens.spacing30, top = Dimens.spacing10, end = Dimens.spacing8, bottom = Dimens.spacing30)
-                    .align(Alignment.TopCenter)
+                    .fillMaxHeight()
+                    .width(Dimens.spacing56)
+                    .height(Dimens.spacing70)
+                    .clip(RoundedCornerShape(topStart = Dimens.spacing24, bottomStart = Dimens.spacing24))
             )
             Box(
                 modifier = Modifier
@@ -56,7 +54,7 @@ fun PlayerCard(
             ) {
                 Row(modifier = Modifier.padding(Dimens.spacing5)) {
                     Text(
-                        text = playerName,
+                        text = player.name,
                         modifier = Modifier
                             .padding(horizontal = Dimens.spacing2)
                             .graphicsLayer {
@@ -85,7 +83,7 @@ fun PlayerCard(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "$$price",
+                    text = "$${String.format("%.2f", player.price)}",
                     color = Color.Black,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold
@@ -128,7 +126,7 @@ class TrapeziumShape(private val cutAmount: Float) : Shape {
     }
 }
 
-@Preview
+/*@Preview
 @Composable
 private fun PlayerCardPreview() {
     PlayerCard(
@@ -136,4 +134,4 @@ private fun PlayerCardPreview() {
         price = 1150,
         rating = 2
     )
-}
+}*/

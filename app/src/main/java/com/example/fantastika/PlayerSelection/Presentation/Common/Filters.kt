@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.Common
+package com.example.fantastika.PlayerSelection.Presentation.Common
 
 enum class FilterMode {
     PLAYERS, TEAMS, TEAM_PLAYERS

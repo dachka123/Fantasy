@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.Common
+package com.example.fantastika.PlayerSelection.Presentation.Common
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
@@ -19,7 +19,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fantastika.Common.Dimens
 

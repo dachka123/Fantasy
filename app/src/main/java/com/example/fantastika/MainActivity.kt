@@ -11,7 +11,9 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.compose.rememberNavController
 import com.example.fantastika.Navigation.AppNavHost
 import com.example.fantastika.ui.theme.FantastikaTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

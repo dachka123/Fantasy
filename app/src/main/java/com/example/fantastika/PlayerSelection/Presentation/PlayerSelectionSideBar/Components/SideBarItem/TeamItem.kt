@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.Components.SideBarItem
+package com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.Components.SideBarItem
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

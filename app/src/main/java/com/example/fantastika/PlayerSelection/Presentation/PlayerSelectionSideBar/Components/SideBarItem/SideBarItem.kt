@@ -1,11 +1,10 @@
 @file:OptIn(ExperimentalFoundationApi::class)
 
-package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.Components.SideBarItem
+package com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.Components.SideBarItem
 
 import android.content.ClipData
 import android.content.ClipDescription
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -29,23 +28,20 @@ import androidx.compose.ui.draganddrop.DragAndDropTransferData
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
 import com.example.fantastika.Common.Dimens
-import com.example.fantastika.R
+import com.example.fantastika.PlayerSelection.Domain.SimplePlayer
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SidebarItem(
-    label: String,
-    price: Int,
-    team: String,
     onClick: () -> Unit,
     isUsed: Boolean,
     isDraggable: Boolean = true,
-    onDragStart: () -> Unit = {}
+    onDragStart: () -> Unit = {},
+    player: SimplePlayer
 ) {
     val backgroundColor = if (isUsed) Color.White else Color(0xFFB9B9BE)
     Box(
@@ -69,7 +65,7 @@ fun SidebarItem(
                                         transferData = DragAndDropTransferData(
                                             clipData = ClipData.newPlainText(
                                                 ClipDescription.MIMETYPE_TEXT_PLAIN,
-                                                label
+                                                player.name
                                             )
                                         )
                                     )
@@ -82,8 +78,8 @@ fun SidebarItem(
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.imagelogo),
+            AsyncImage(
+                model = player.userPhoto,
                 contentDescription = "Player Image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -99,7 +95,7 @@ fun SidebarItem(
                     .padding(vertical = Dimens.spacing24, horizontal = Dimens.spacing5)
             ) {
                 Text(
-                    label,
+                    player.name,
                     style = MaterialTheme.typography.bodyLarge,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -107,13 +103,13 @@ fun SidebarItem(
                     color = Color.Black
                 )
                 Text(
-                    text = team,
+                    text = player.team?.name ?: "N/A",
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                     modifier = Modifier.padding(end = Dimens.spacing5),
                     color = Color.Black
                 )
                 Text(
-                    text = "$$price",
+                    text = "$${String.format("%.2f", player.price)}",
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                     color = Color.Black
                 )
@@ -122,16 +118,17 @@ fun SidebarItem(
     }
 }
 
-@Preview
+/*@Preview
 @Composable
 private fun SidebarItemPreview() {
     SidebarItem(
-        label = "Player Name",
-        price = 10,
-        team = "Team Name",
         onClick = {},
         isUsed = false,
         isDraggable = true,
-        onDragStart = {}
+        onDragStart = {},
+        player = SimplePlayer(
+            name = "dachi"
+
+        )
     )
-}
+}*/

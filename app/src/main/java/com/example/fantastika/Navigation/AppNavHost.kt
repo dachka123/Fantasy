@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.example.fantastika.LandingPage.MainLandingPage
 import com.example.fantastika.LoginRegister.Login.LoginPageContent
 import com.example.fantastika.LoginRegister.Register.RegisterPageContent
-import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarViewModel
+import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.SideBarViewModel
 import com.example.fantastika.SideBarDragDrop
 
 @Composable

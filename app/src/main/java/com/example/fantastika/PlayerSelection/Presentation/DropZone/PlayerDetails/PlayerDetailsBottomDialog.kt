@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.DropZone.PlayerDetails
+package com.example.fantastika.PlayerSelection.Presentation.DropZone.PlayerDetails
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,11 +28,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fantastika.Common.Dimens
-import com.example.fantastika.PlayerSelection.Common.DrawerDragHandle
-import com.example.fantastika.PlayerSelection.Common.IphoneDrawer
+import com.example.fantastika.PlayerSelection.Presentation.Common.DrawerDragHandle
+import com.example.fantastika.PlayerSelection.Presentation.Common.IphoneDrawer
 import com.example.fantastika.R
 
 @Composable

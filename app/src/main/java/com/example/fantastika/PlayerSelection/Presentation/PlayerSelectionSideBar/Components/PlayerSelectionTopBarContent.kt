@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.Components
+package com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.Components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -28,11 +28,11 @@ import java.text.DecimalFormat
 
 @Composable
 fun PlayerSelectionTopBarContent(
-    remainingBudget: Int,
+    remainingBudget: Double,
     modifier: Modifier = Modifier
 ) {
     val formatBudget = remember(remainingBudget) {
-        val df = DecimalFormat("#,##0")
+        val df = DecimalFormat("#,##0.0")
         val budgetInK = remainingBudget / 10
         "${df.format(budgetInK)}K"
     }
