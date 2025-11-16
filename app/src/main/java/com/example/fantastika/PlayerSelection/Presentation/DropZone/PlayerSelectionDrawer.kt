@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.DropZone
+package com.example.fantastika.PlayerSelection.Presentation.DropZone
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -6,24 +6,24 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.example.fantastika.Common.Dimens
-import com.example.fantastika.PlayerSelection.Common.DrawerDragHandle
-import com.example.fantastika.PlayerSelection.Common.FilterContent
-import com.example.fantastika.PlayerSelection.Common.FilterMode
-import com.example.fantastika.PlayerSelection.Common.FilterSection
-import com.example.fantastika.PlayerSelection.Common.IphoneDrawer
-import com.example.fantastika.PlayerSelection.Common.SortMode
-import com.example.fantastika.PlayerSelection.Common.SortSection
-import com.example.fantastika.PlayerSelection.Data.Player
+import com.example.fantastika.PlayerSelection.Presentation.Common.DrawerDragHandle
+import com.example.fantastika.PlayerSelection.Presentation.Common.FilterContent
+import com.example.fantastika.PlayerSelection.Presentation.Common.FilterMode
+import com.example.fantastika.PlayerSelection.Presentation.Common.FilterSection
+import com.example.fantastika.PlayerSelection.Presentation.Common.IphoneDrawer
+import com.example.fantastika.PlayerSelection.Presentation.Common.SortMode
+import com.example.fantastika.PlayerSelection.Presentation.Common.SortSection
+import com.example.fantastika.PlayerSelection.Domain.SimplePlayer
 
 
 @Composable
 fun PlayerSelectionDrawer(
-    allPlayers: List<Player>,
+    allPlayers: List<SimplePlayer>,
     usedItems: List<String>,
+    isLoading: Boolean,
     onDismiss: () -> Unit,
-    onPlayerSelected: (Player) -> Unit
+    onPlayerSelected: (SimplePlayer) -> Unit,
 ) {
     var filterMode by remember { mutableStateOf(FilterMode.PLAYERS) }
     var selectedTeam by remember { mutableStateOf<String?>(null) }
@@ -76,13 +76,14 @@ fun PlayerSelectionDrawer(
                     filterMode = filterMode,
                     sortMode = sortMode,
                     allPlayers = allPlayers,
+                    isLoading = isLoading,
                     usedItems = usedItems,
                     selectedTeam = selectedTeam,
                     onPlayerSelected = onPlayerSelected,
                     onTeamSelected = {
                         selectedTeam = it
                         filterMode = FilterMode.TEAM_PLAYERS
-                    }
+                    },
                 )
 
                 Box(

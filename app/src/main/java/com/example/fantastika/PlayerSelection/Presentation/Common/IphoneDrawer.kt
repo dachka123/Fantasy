@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.Common
+package com.example.fantastika.PlayerSelection.Presentation.Common
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween

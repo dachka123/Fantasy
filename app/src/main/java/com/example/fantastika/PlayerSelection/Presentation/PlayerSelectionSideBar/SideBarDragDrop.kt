@@ -18,14 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.fantastika.Common.Dimens
-import com.example.fantastika.PlayerSelection.DropZone.DropZone
-import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SideBarViewModel
-import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.SidebarContent
-import com.example.fantastika.PlayerSelection.Data.allPlayers
+import com.example.fantastika.PlayerSelection.Presentation.DropZone.DropZone
+import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.SideBarViewModel
+import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.SidebarContent
 import com.example.fantastika.Common.SideBarNav
-import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.Components.PlayerSelectionTopBarContent
+import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.Components.PlayerSelectionTopBarContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,6 +39,8 @@ fun SideBarDragDrop(
     val usedItems by viewModel.usedItems.collectAsState()
     val remainingBudget by viewModel.remainingBudget.collectAsState()
     var rotationAngle by remember { mutableStateOf(0f) }
+
+    val playersState by viewModel.playersState.collectAsStateWithLifecycle()
 
     BackHandler {
         onBackPressed()
@@ -61,7 +63,7 @@ fun SideBarDragDrop(
 
         drawerContent = { closeDrawer ->
             SidebarContent(
-                allPlayers = allPlayers,
+                playersState = playersState,
                 usedItems = usedItems,
                 onItemDragStart = {
                     closeDrawer()

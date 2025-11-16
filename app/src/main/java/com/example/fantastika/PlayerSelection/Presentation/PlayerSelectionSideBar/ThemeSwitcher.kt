@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar
+package com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar
 
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.animateDpAsState

@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.Common
+package com.example.fantastika.PlayerSelection.Presentation.Common
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.example.fantastika.Common.Dimens
 import com.example.fantastika.ui.theme.FantastikaTheme
 

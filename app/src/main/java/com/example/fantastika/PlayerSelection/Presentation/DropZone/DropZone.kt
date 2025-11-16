@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.DropZone
+package com.example.fantastika.PlayerSelection.Presentation.DropZone
 
 import android.content.ClipDescription
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -25,9 +25,11 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.fantastika.Common.Dimens
-import com.example.fantastika.PlayerSelection.DropZone.PlayerDetails.PlayerDetailsBottomDialog
-import com.example.fantastika.PlayerSelection.Data.allPlayers
+import com.example.fantastika.PlayerSelection.Presentation.DropZone.PlayerDetails.PlayerDetailsBottomDialog
+import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.SideBarViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -36,8 +38,11 @@ fun DropZone(
     onItemDropped: (String) -> Boolean,
     onItemRemoved: (String) -> Unit,
     usedItems: List<String>,
-    remainingBudget: Int
+    remainingBudget: Double
 ) {
+    val viewModel: SideBarViewModel = hiltViewModel()
+    val playersState by viewModel.playersState.collectAsStateWithLifecycle()
+    val allPlayers = playersState.players
 
     val onBackground = Color.White
     var showDialog by remember { mutableStateOf(false) }
@@ -45,7 +50,7 @@ fun DropZone(
     var showBudgetError by remember { mutableStateOf(false) }
 
     fun getPlayerPrice(playerName: String): Int {
-        return allPlayers.firstOrNull { it.name == playerName }?.price ?: 0
+        return (allPlayers.firstOrNull { it.name == playerName }?.price ?: 0.0).toInt()
     }
 
     Box(
@@ -103,20 +108,27 @@ fun DropZone(
     ) {
         if (droppedItem != null) {
             val player = allPlayers.firstOrNull { it.name == droppedItem }
-            Box(modifier = Modifier.fillMaxSize()) {
-                PlayerCard(
-                    playerName = droppedItem,
-                    price = player?.price ?: 0
-                )
-                Icon(
-                    imageVector = Icons.Filled.Close,
-                    contentDescription = "Remove item",
-                    tint = Color.Red,
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(Dimens.spacing5)
-                        .size(Dimens.spacing24)
-                        .clickable { onItemRemoved(droppedItem) }
+            player?.let { simplePlayer ->
+                Box(modifier = Modifier.fillMaxSize()) {
+                    PlayerCard(
+                        player = simplePlayer,
+                        rating = 2
+                    )
+                    Icon(
+                        imageVector = Icons.Filled.Close,
+                        contentDescription = "Remove item",
+                        tint = Color.Red,
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(Dimens.spacing5)
+                            .size(Dimens.spacing24)
+                            .clickable { onItemRemoved(droppedItem) }
+                    )
+                }
+            } ?: run {
+                Text(
+                    text = "Data Missing",
+                    color = Color.White
                 )
             }
         }
@@ -133,6 +145,7 @@ fun DropZone(
     if (showDialog) {
         PlayerSelectionDrawer(
             allPlayers = allPlayers,
+            isLoading = playersState.isLoading,
             usedItems = usedItems,
             onDismiss = { showDialog = false },
             onPlayerSelected = { player ->
@@ -148,8 +161,8 @@ fun DropZone(
     }
     if (showBudgetError) {
         AlertDialog(
-            modifier = Modifier
-                .background(Color.Black),
+            /*modifier = Modifier
+                .background(Color.Black),*/
             onDismissRequest = {
                 showBudgetError = false
             },
@@ -164,7 +177,7 @@ fun DropZone(
                     "Your current remaining budget is $${remainingBudget}. " +
                             "Please select a cheaper player or remove an existing player from your lineup to free up funds.",
                     fontWeight = FontWeight.Normal,
-                    color = Color.White
+                    color = Color.Black
                 )
             },
             confirmButton = {
@@ -175,7 +188,7 @@ fun DropZone(
                 ) {
                     Text(
                         "OK",
-                        color = Color.White
+                        color = Color.Black
                     )
                 }
             },
@@ -186,8 +199,8 @@ fun DropZone(
 
         PlayerDetailsBottomDialog(
             playerName = droppedItem,
-            playerPrice = playerData?.price ?: 0,
-            playerTeam = playerData?.team ?: "Free Agent",
+            playerPrice = playerData?.price?.toInt() ?: 0, // Convert to Int for display
+            playerTeam = playerData?.team?.name ?: "Free Agent", // Access team name
             onDismiss = { showPlayerDetailsDialog = false },
             onRemove = {
                 onItemRemoved(droppedItem)

@@ -5,7 +5,7 @@ import com.example.fantastika.Common.Dimens
 import com.example.fantastika.LandingPage.Components.FixtureBoxes
 import com.example.fantastika.Common.SideBarNav
 import com.example.fantastika.LandingPage.Components.LandingPageTopBarContent
-import com.example.fantastika.PlayerSelection.PlayerSelectionSideBar.ThemeSwitcher
+import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.ThemeSwitcher
 
 @Composable
 fun MainLandingPage(

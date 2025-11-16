@@ -1,4 +1,4 @@
-package com.example.fantastika.PlayerSelection.PlayerSelectionSideBar
+package com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -7,19 +7,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.example.fantastika.Common.Dimens
-import com.example.fantastika.PlayerSelection.Common.FilterContent
-import com.example.fantastika.PlayerSelection.Common.FilterMode
-import com.example.fantastika.PlayerSelection.Common.FilterSection
-import com.example.fantastika.PlayerSelection.Common.SortMode
-import com.example.fantastika.PlayerSelection.Common.SortSection
-import com.example.fantastika.PlayerSelection.Data.Player
+import com.example.fantastika.PlayerSelection.Presentation.Common.FilterContent
+import com.example.fantastika.PlayerSelection.Presentation.Common.FilterMode
+import com.example.fantastika.PlayerSelection.Presentation.Common.FilterSection
+import com.example.fantastika.PlayerSelection.Presentation.Common.SortMode
+import com.example.fantastika.PlayerSelection.Presentation.Common.SortSection
 
 
 @Composable
 fun SidebarContent(
-    allPlayers: List<Player>,
+    playersState: SideBarViewModel.PlayersState,
     usedItems: List<String>,
     onItemDragStart: () -> Unit
 ) {
@@ -62,7 +60,8 @@ fun SidebarContent(
                     modifier = Modifier.fillMaxSize(),
                     filterMode = filterMode,
                     sortMode = sortMode,
-                    allPlayers = allPlayers,
+                    allPlayers = playersState.players,
+                    isLoading = playersState.isLoading,
                     usedItems = usedItems,
                     selectedTeam = selectedTeam,
                     onPlayerSelected = {},
@@ -71,7 +70,7 @@ fun SidebarContent(
                         filterMode = FilterMode.TEAM_PLAYERS
                     },
                     isDraggable = true,
-                    onDragStart = onItemDragStart
+                    onDragStart = onItemDragStart,
                 )
             }
 
