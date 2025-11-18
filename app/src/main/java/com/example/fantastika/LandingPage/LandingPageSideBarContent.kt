@@ -36,7 +36,8 @@ fun LandingPageSideBarContent(
     onHomeClick: () -> Unit = {},
     onLeaderboardClick: () -> Unit = {},
     onStatisticsClick: () -> Unit = {},
-    onLogoutClick: () -> Unit = {}
+    onLogoutClick: () -> Unit = {},
+    isUserLoggedIn: Boolean = false
 ) {
     Box(
         modifier = modifier
@@ -121,17 +122,19 @@ fun LandingPageSideBarContent(
                 )
             }
         }
-        Row(
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .clickable(onClick = onLogoutClick)
-                .padding(vertical = Dimens.spacing8),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Log out",
-                color = Color.White
-            )
+        if (isUserLoggedIn) {
+            Row(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .clickable(onClick = onLogoutClick)
+                    .padding(vertical = Dimens.spacing8),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Log out",
+                    color = Color.White
+                )
+            }
         }
     }
 }

@@ -1,0 +1,10 @@
+mutation AssignPlayerToTeam($teamId: ID!, $playerId: ID!) {
+    assignPlayerToTeam(teamId: $teamId, playerId: $playerId) {
+        id
+        name
+        team {
+            id
+            name
+        }
+    }
+}

@@ -1,0 +1,14 @@
+query UserTeams($userId: ID!) {
+    userTeams(userId: $userId) {
+        id
+        name
+        players {
+            id
+            name
+            price
+            team {
+                id
+            }
+        }
+    }
+}

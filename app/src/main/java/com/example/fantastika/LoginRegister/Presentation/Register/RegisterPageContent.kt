@@ -1,4 +1,4 @@
-package com.example.fantastika.LoginRegister.Register
+package com.example.fantastika.LoginRegister.Presentation.Register
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,6 +23,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,16 +39,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.example.fantastika.LoginRegister.Common.AuthCard
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.fantastika.LoginRegister.Presentation.Common.AuthCard
 import com.example.fantastika.R
 
 @Composable
 fun RegisterPageContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onRegistrationSuccess: () -> Unit,
 ) {
     val cyan = Color(0xFF00BCD4)
     val lightBlue = Color(0xFF2196F3)
     val borderGray = Color(0xFF2A3B4C)
+
+    val viewModel: RegisterViewModel = hiltViewModel()
+    val state by viewModel.state.collectAsState()
+    var passwordVisible by remember { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = state.isSuccess) {
+        if (state.isSuccess) {
+            onRegistrationSuccess()
+        }
+    }
 
     Box(
         Modifier.fillMaxSize()
@@ -60,12 +74,6 @@ fun RegisterPageContent(
 
         AuthCard(modifier.padding(24.dp)) {
 
-            var gmailText by remember { mutableStateOf("") }
-            var username by remember { mutableStateOf("") }
-            var passwordText by remember { mutableStateOf("") }
-            var confirmPassword by remember { mutableStateOf("") }
-            var passwordVisible by remember { mutableStateOf(false) }
-
             Text(
                 text = "Register Here",
                 color = Color.White,
@@ -74,8 +82,8 @@ fun RegisterPageContent(
 
             //username
             OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
+                value = state.username,
+                onValueChange = viewModel::updateUsername,
                 label = { Text("username") },
                 leadingIcon = {
                     Icon(
@@ -100,20 +108,21 @@ fun RegisterPageContent(
 
             //gmail
             OutlinedTextField(
-                value = gmailText,
-                onValueChange = { gmailText = it },
+                value = state.email,
+                onValueChange = viewModel::updateEmail,
                 label = { Text("gmail") },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Email,
                         contentDescription = "Email Icon",
-                        tint = cyan
+                        tint = if (state.emailError != null) Color.Red else cyan
                     )
                 },
+                isError = state.emailError != null,
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = cyan,
-                    unfocusedBorderColor = borderGray,
-                    focusedLabelColor = cyan,
+                    focusedBorderColor = if (state.emailError != null) Color.Red else cyan,
+                    unfocusedBorderColor = if (state.emailError != null) Color.Red else borderGray,
+                    focusedLabelColor = if (state.emailError != null) Color.Red else cyan,
                     unfocusedLabelColor = Color.Gray,
                     focusedTextColor = Color.White,
                     unfocusedTextColor = Color.White
@@ -126,8 +135,8 @@ fun RegisterPageContent(
 
             //password
             OutlinedTextField(
-                value = passwordText,
-                onValueChange = { passwordText = it },
+                value = state.password,
+                onValueChange = viewModel::updatePassword,
                 label = { Text("Password") },
                 leadingIcon = {
                     Icon(
@@ -160,8 +169,8 @@ fun RegisterPageContent(
 
             //confirmPassword
             OutlinedTextField(
-                value = confirmPassword,
-                onValueChange = { confirmPassword = it },
+                value = state.confirmPassword,
+                onValueChange = viewModel::updateConfirmPassword,
                 label = { Text("confirm password") },
                 leadingIcon = {
                     Icon(
@@ -194,7 +203,8 @@ fun RegisterPageContent(
 
 
             Button(
-                onClick = { },
+                onClick = { viewModel.register() },
+                enabled = !state.isLoading && state.emailError == null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(55.dp)
@@ -220,6 +230,14 @@ fun RegisterPageContent(
                         fontWeight = FontWeight.Bold
                     )
                 }
+            }
+
+            state.error?.let {
+                Text(it, color = Color.Red, modifier = Modifier.padding(top = 8.dp))
+            }
+
+            if (state.isSuccess) {
+                Text("Registration successful! Redirecting to login...", color = Color.Green, modifier = Modifier.padding(top = 8.dp))
             }
         }
     }

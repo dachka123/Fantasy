@@ -20,7 +20,8 @@ import com.example.fantastika.ui.theme.FantastikaTheme
 @Composable
 fun LandingPageTopBarContent(
     modifier: Modifier = Modifier,
-    onNavigateToLogin: () -> Unit
+    onNavigateToLogin: () -> Unit,
+    loggedInUsername: String? = null
 ) {
     Row(
         modifier = modifier
@@ -28,24 +29,34 @@ fun LandingPageTopBarContent(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End
     ) {
-        Box(
-            modifier = Modifier
-                .padding(end = Dimens.spacing10)
-                .clip(RoundedCornerShape(Dimens.spacing24))
-                .background(FantastikaTheme.color.background)
-                .border(
-                    width = Dimens.spacing1,
-                    color = FantastikaTheme.color.onBackground,
-                    shape = RoundedCornerShape(Dimens.spacing24)
-                )
-                .clickable { onNavigateToLogin() }
-                .padding(horizontal = Dimens.spacing8, vertical = Dimens.spacing2),
-            contentAlignment = Alignment.Center
-        ) {
+        if (loggedInUsername != null) {
+            // Display Welcome Message
             Text(
-                text = "Log in",
-                color = FantastikaTheme.color.onBackground
+                text = "Welcome, ${loggedInUsername}",
+                color = FantastikaTheme.color.onBackground,
+                modifier = Modifier.padding(end = Dimens.spacing10)
             )
+        } else {
+            // Display Log In Button
+            Box(
+                modifier = Modifier
+                    .padding(end = Dimens.spacing10)
+                    .clip(RoundedCornerShape(Dimens.spacing24))
+                    .background(FantastikaTheme.color.background)
+                    .border(
+                        width = Dimens.spacing1,
+                        color = FantastikaTheme.color.onBackground,
+                        shape = RoundedCornerShape(Dimens.spacing24)
+                    )
+                    .clickable { onNavigateToLogin() }
+                    .padding(horizontal = Dimens.spacing8, vertical = Dimens.spacing2),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Log in",
+                    color = FantastikaTheme.color.onBackground
+                )
+            }
         }
     }
 }
