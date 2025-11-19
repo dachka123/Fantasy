@@ -1,4 +1,4 @@
-package com.example.fantastika.LoginRegister.Common
+package com.example.fantastika.LoginRegister.Presentation.Common
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

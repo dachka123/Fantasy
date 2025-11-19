@@ -26,6 +26,8 @@ import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBa
 import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.SidebarContent
 import com.example.fantastika.Common.SideBarNav
 import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.Components.PlayerSelectionTopBarContent
+import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.SideBarUiEvent
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,17 +35,24 @@ fun SideBarDragDrop(
     viewModel: SideBarViewModel = viewModel(),
     darkTheme: Boolean,
     onThemeUpdated: () -> Unit,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
+    loggedInUserId: String?
 ) {
     val droppedZones by viewModel.droppedZones.collectAsState()
     val usedItems by viewModel.usedItems.collectAsState()
     val remainingBudget by viewModel.remainingBudget.collectAsState()
+    val isTeamComplete by viewModel.isTeamComplete.collectAsState()
     var rotationAngle by remember { mutableStateOf(0f) }
 
     val playersState by viewModel.playersState.collectAsStateWithLifecycle()
+    val snackBarHostState = remember { SnackbarHostState() }
 
     BackHandler {
         onBackPressed()
+    }
+
+    LaunchedEffect(loggedInUserId) {
+        viewModel.setUserId(loggedInUserId)
     }
 
     LaunchedEffect(Unit) {
@@ -56,9 +65,35 @@ fun SideBarDragDrop(
         }
     }
 
+    LaunchedEffect(viewModel.uiEvent, snackBarHostState) {
+        viewModel.uiEvent.collectLatest { event ->
+            when (event) {
+                is SideBarUiEvent.Success -> snackBarHostState.showSnackbar(
+                    message = event.message,
+                    actionLabel = "OK",
+                    withDismissAction = true
+                )
+                is SideBarUiEvent.Error -> snackBarHostState.showSnackbar(
+                    message = "Error: ${event.message}",
+                    actionLabel = "Dismiss",
+                    withDismissAction = true
+                )
+                is SideBarUiEvent.Message -> snackBarHostState.showSnackbar(
+                    message = event.message,
+                    actionLabel = "Got it",
+                    withDismissAction = true
+                )
+            }
+        }
+    }
+
     SideBarNav(
         //title = "Fantastika",
-        topBarContent = { PlayerSelectionTopBarContent(remainingBudget = remainingBudget) },
+        topBarContent = { PlayerSelectionTopBarContent(
+            remainingBudget = remainingBudget,
+            isTeamComplete = isTeamComplete,
+            onSaveTeam = viewModel::saveTeam
+        ) },
         onBackPressed = onBackPressed,
 
         drawerContent = { closeDrawer ->
@@ -78,6 +113,11 @@ fun SideBarDragDrop(
                     .padding(padding),
                 contentAlignment = Alignment.TopCenter
             ) {
+                SnackbarHost(
+                    hostState = snackBarHostState,
+                    modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = Dimens.spacing16)
+                )
+
                 Image(
                     painter = painterResource(id = R.drawable.background4),
                     contentDescription = "App Background",

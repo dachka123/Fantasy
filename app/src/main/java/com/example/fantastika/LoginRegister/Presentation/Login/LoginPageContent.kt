@@ -1,4 +1,4 @@
-package com.example.fantastika.LoginRegister.Login
+package com.example.fantastika.LoginRegister.Presentation.Login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -6,8 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
@@ -24,18 +24,35 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.fantastika.Common.Dimens
-import com.example.fantastika.LoginRegister.Common.AuthCard
+import com.example.fantastika.LoginRegister.Presentation.Common.AuthCard
 import com.example.fantastika.R
 
 @Composable
 fun LoginPageContent(
     modifier: Modifier = Modifier,
-    onNavigateToRegister: () -> Unit
+    onNavigateToRegister: () -> Unit,
+    onLoginSuccess: (token: String,username: String) -> Unit,
 ) {
     val cyan = Color(0xFF00BCD4)
     val lightBlue = Color(0xFF2196F3)
     val borderGray = Color(0xFF2A3B4C)
+    val viewModel: LoginViewModel = hiltViewModel()
+    val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.eventFlow.collect { event ->
+            when (event) {
+                is LoginUiEvent.LoginSuccess -> {
+                    onLoginSuccess(event.token,event.username)
+                }
+                is LoginUiEvent.NavigateToRegister -> {
+                    // (Optional) If you were using the VM to trigger register navigation
+                }
+            }
+        }
+    }
 
     Box(
         Modifier.fillMaxSize()
@@ -49,8 +66,8 @@ fun LoginPageContent(
 
         AuthCard(modifier.padding(24.dp)) {
 
-            var gmailText by remember { mutableStateOf("") }
-            var passwordText by remember { mutableStateOf("") }
+            var usernameText by remember { mutableStateOf(state.username) }
+            var passwordText by remember { mutableStateOf(state.password) }
             var passwordVisible by remember { mutableStateOf(false) }
 
             Text(
@@ -60,12 +77,12 @@ fun LoginPageContent(
             )
 
             OutlinedTextField(
-                value = gmailText,
-                onValueChange = { gmailText = it },
-                label = { Text("Gmail") },
+                value = usernameText,
+                onValueChange = { usernameText = it },
+                label = { Text("username") },
                 leadingIcon = {
                     Icon(
-                        imageVector = Icons.Default.Email,
+                        imageVector = Icons.Default.Person,
                         contentDescription = "Email Icon",
                         tint = cyan
                     )
@@ -119,7 +136,8 @@ fun LoginPageContent(
 
 
             Button(
-                onClick = { },
+                onClick = { viewModel.login(usernameText, passwordText) },
+                enabled = !state.isLoading,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(55.dp)
@@ -145,6 +163,10 @@ fun LoginPageContent(
                         fontWeight = FontWeight.Bold
                     )
                 }
+            }
+
+            state.error?.let {
+                Text(it, color = Color.Red, modifier = Modifier.padding(top = 8.dp))
             }
 
             Row(
