@@ -10,6 +10,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.fantastika.LandingPage.MainLandingPage
+import com.example.fantastika.LandingPage.SideBar.LeaderBoard.LeaderboardScreen
+import com.example.fantastika.LandingPage.SideBar.Statistics.StatisticsScreen
 import com.example.fantastika.LoginRegister.Presentation.Login.LoginPageContent
 import com.example.fantastika.LoginRegister.Presentation.Register.RegisterPageContent
 import com.example.fantastika.PlayerSelection.Presentation.PlayerSelectionSideBar.SideBarViewModel
@@ -55,7 +57,19 @@ fun AppNavHost(
                 },
                 onNavigateToLogin = {
                     navController.navigate(NavRoutes.Login.route)
-                }
+                },
+
+                onNavigateToHome = {
+                    navController.navigate(NavRoutes.Landing.route)
+                },
+
+                onNavigateToLeaderboard = {
+                    navController.navigate(NavRoutes.Leaderboard.route)
+                },
+
+                onNavigateToStatistics = {
+                    navController.navigate(NavRoutes.Statistics.route)
+                },
             )
         }
 
@@ -94,6 +108,56 @@ fun AppNavHost(
                     navController.navigate(NavRoutes.Login.route) {
                         popUpTo(NavRoutes.Register.route) { inclusive = true }
                     }
+                }
+            )
+        }
+
+        composable(NavRoutes.Leaderboard.route) {
+            LeaderboardScreen(
+                darkTheme = darkTheme,
+                onThemeUpdated = onThemeUpdated,
+                isUserLoggedIn = accessToken != null,
+                loggedInUsername = loggedInUsername,
+                onLogout = onLogout,
+                onNavigateToHome = {
+                    navController.navigate(NavRoutes.Landing.route)
+                },
+                onNavigateToLeaderboard = {
+                    navController.navigate(NavRoutes.Leaderboard.route)
+                },
+                onNavigateToStatistics = {
+                    navController.navigate(NavRoutes.Statistics.route)
+                },
+                onNavigateToLogin = {
+                    navController.navigate(NavRoutes.Login.route)
+                },
+                onNavigateToFixtures = {
+                    navController.navigate(NavRoutes.MainApp.route)
+                }
+            )
+        }
+
+        composable(NavRoutes.Statistics.route) {
+            StatisticsScreen(
+                darkTheme = darkTheme,
+                onThemeUpdated = onThemeUpdated,
+                isUserLoggedIn = accessToken != null,
+                loggedInUsername = loggedInUsername,
+                onLogout = onLogout,
+                onNavigateToHome = {
+                    navController.navigate(NavRoutes.Landing.route)
+                },
+                onNavigateToLeaderboard = {
+                    navController.navigate(NavRoutes.Leaderboard.route)
+                },
+                onNavigateToStatistics = {
+                    navController.navigate(NavRoutes.Statistics.route)
+                },
+                onNavigateToLogin = {
+                    navController.navigate(NavRoutes.Login.route)
+                },
+                onNavigateToFixtures = {
+                    navController.navigate(NavRoutes.MainApp.route)
                 }
             )
         }

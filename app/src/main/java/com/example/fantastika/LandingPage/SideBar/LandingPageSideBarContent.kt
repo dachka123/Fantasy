@@ -1,5 +1,6 @@
-package com.example.fantastika.LandingPage
+package com.example.fantastika.LandingPage.SideBar
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Leaderboard
+import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.QueryStats
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -25,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.fantastika.Common.Dimens
@@ -37,8 +40,11 @@ fun LandingPageSideBarContent(
     onLeaderboardClick: () -> Unit = {},
     onStatisticsClick: () -> Unit = {},
     onLogoutClick: () -> Unit = {},
+    onNavigateToFixtures: () -> Unit = {},
     isUserLoggedIn: Boolean = false
 ) {
+    val context = LocalContext.current
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -78,6 +84,37 @@ fun LandingPageSideBarContent(
                 Spacer(modifier = Modifier.width(Dimens.spacing16))
                 Text(
                     text = "Home",
+                    color = Color.White
+                )
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(
+                        onClick = {
+                        if (isUserLoggedIn) {
+                            onNavigateToFixtures()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "First login if you want to select players or see a team",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
+                    .padding(vertical = Dimens.spacing8),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Default.People,
+                    contentDescription = "Team",
+                    modifier = Modifier.size(Dimens.spacing24),
+                    tint = Color.White
+                )
+                Spacer(modifier = Modifier.width(Dimens.spacing16))
+                Text(
+                    text = "Team",
                     color = Color.White
                 )
             }
